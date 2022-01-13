@@ -8,7 +8,9 @@
                     <img src="./assets/logo.png" alt="Logo">
                     <p>CryptoWallet</p>
                 </router-link>
-                <router-link to="/">Home</router-link>
+                <router-link to="/">Wallet</router-link>
+                <router-link to="/Overview">Overview</router-link>
+                <router-link to="/">Transaction</router-link>
             </div>
         </div>
 
@@ -36,10 +38,10 @@
         },
         methods: {
             ...mapActions([
-                'addMessage', 'addFeedback', 'delFeedback',
+                'updateData', 'addMessage', 'addFeedback', 'delFeedback',
             ]),
             ...mapGetters([
-                'getFeedback', 'getMessage',
+                'getData', 'getFeedback', 'getMessage',
             ]),
             addFeed(){
                 this.addMessage('En cours de developpement...');
@@ -54,10 +56,9 @@
 
 <style>
     :root {
-        /* #35495E;
-        #41B883; */
+        --main-first-color: #41B883;
+        --main-second-color: #35495E;
 
-        --main-red-color: #E56B6F;
         --main-blue-color: #348AF4;
         --main-grey-color: #333;
         --main-white-color: #FFF;
@@ -65,12 +66,10 @@
         --main-yellow-color: #FFCF60;
 
         --main-dark-blue-color: #2c3e50;
-        --main-body-color: #FAE2E3;
-
-        --home-red-color: #FB565E;
-        --home-grey-color: #6D6969;
-        --home-white-color: #FFFAF8;
-        --home-shadow-color: #6D6969;
+        --main-body-color: #E2FAE9;
+        /* #E2FAE9 */
+        /* #E2FAE2 */
+        /* #ADF1CF */
     }
 
     #app {
@@ -91,7 +90,7 @@
         padding: 10px;
         display: grid;
         grid-template-columns: 3fr 1fr;
-        background: var(--main-red-color);
+        background: var(--main-first-color);
         font-weight: bold;
     }
 
@@ -106,7 +105,7 @@
         padding: 10px 20px;
         text-decoration: none;
         color: #333;
-        border-bottom: 3px solid var(--main-red-color);
+        border-bottom: 3px solid var(--main-first-color);
         transition: 0.5s;
     }
 
@@ -120,11 +119,13 @@
         align-items: center;
         background: var(--main-white-color);
         border-radius: 10px;
-        border: 3px solid var(--main-red-color);
+        border: 3px solid var(--main-first-color);
     }
 
     .nav #logo:hover {
-        border: 3px solid var(--main-green-color);
+        color: var(--main-white-color);
+        background: var(--main-second-color);
+        border: 3px solid var(--main-second-color);
     }
 
     .nav #logo img {

@@ -82,7 +82,7 @@
     }
 
     a {
-        color: var(--main-red-color);
+        color: var(--main-first-color);
         text-decoration: none;
     }
 
@@ -99,7 +99,7 @@
     .line {
         width: 70px;
         height: 5px;
-        background: var(--main-red-color);
+        background: var(--main-first-color);
         margin-bottom: 30px;
     }
 
@@ -138,10 +138,10 @@
     .newsletter button {
         height: 35px;
         margin: 0 10px;
-        border: 1px solid var(--main-red-color);
+        border: 1px solid var(--main-first-color);
         border-radius: 5px;
         color: var(--main-white-color);
-        background: var(--main-red-color);
+        background: var(--main-first-color);
         font-weight: bold;
         transition: 0.5s;
         cursor: pointer;
@@ -150,23 +150,25 @@
     .newsletter i {
         margin: 0 5px;
         padding: 10px;
-        border: 2px solid var(--main-red-color);
+        border: 2px solid var(--main-first-color);
         border-radius: 50%;
         color: var(--main-white-color);
-        background: var(--main-red-color);
+        background: var(--main-first-color);
         font-weight: bold;
         font-size: 25px;
         transition: 0.5s;
     }
 
     .newsletter button:hover {
-        background: var(--main-green-color);
-        border: 1px solid var(--main-green-color);
+        color: var(--main-first-color);
+        background: var(--main-white-color);
+        border: 1px solid var(--main-white-color);
     }
 
     .newsletter i:hover {
-        background: var(--main-green-color);
-        border: 2px solid var(--main-green-color);
+        color: var(--main-first-color);
+        background: var(--main-white-color);
+        border: 2px solid var(--main-white-color);
     }
 
 

@@ -26,14 +26,9 @@
                 maxRecords: 3,
                 view: "Grid view"
             }).eachPage(response => {
-                console.log(response);
-                response.forEach(line => {
-                    console.log(line.fields);
-                })
-                // records.forEach(function(record) {
-                //     console.log('Retrieved', record.get('Name'));
-                // });
-                // fetchNextPage();
+                for(let res in response) {
+                    this.data[res] = response[res].fields;
+                }
                 this.updateStore();
             }, function done(err) {
                 if (err) { console.error(err); return; }

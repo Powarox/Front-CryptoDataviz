@@ -67,7 +67,7 @@
     }
 
     .feedback i {
-        color: var(--main-red-color);
+        color: var(--main-first-color);
         padding: 0 10px;
     }
 

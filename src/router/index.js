@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
+import Overview from '../views/Overview.vue';
 import NotFound from '../views/NotFound.vue';
 
 const routes = [
@@ -9,6 +10,14 @@ const routes = [
         component: Home,
         meta: {
             title: 'Accueil',
+        }
+    },
+    {
+        path: '/Overview',
+        name: 'Overview',
+        component: Overview,
+        meta: {
+            title: 'Overview',
         }
     },
     {
