@@ -16,6 +16,7 @@
 
         <div class="main">
             <router-view/>
+            <img alt="Vue logo" src="./assets/logo.png">
         </div>
 
         <Footer/>
@@ -28,15 +29,33 @@
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
-      name: 'App',
-      components: {
-        HelloWorld
-      }
+        name: 'App',
+        components: {
+            Footer, Feedback,
+        },
+        methods: {
+            ...mapActions([
+                'addMessage', 'addFeedback', 'delFeedback',
+            ]),
+            ...mapGetters([
+                'getFeedback', 'getMessage',
+            ]),
+            addFeed(){
+                this.addMessage('En cours de developpement...');
+                this.addFeedback();
+            },
+            delFeed(){
+                this.delFeedback();
+            },
+        }
     }
 </script>
 
 <style>
     :root {
+        /* #35495E;
+        #41B883; */
+
         --main-red-color: #E56B6F;
         --main-blue-color: #348AF4;
         --main-grey-color: #333;
@@ -54,12 +73,11 @@
     }
 
     #app {
-      font-family: Avenir, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      /* text-align: center; */
-      color: var(--main-dark-blue-color);
-      margin: 0;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: var(--main-dark-blue-color);
+        margin: 0;
     }
 
     body {
@@ -115,37 +133,6 @@
     .nav #logo p {
         margin: 0;
         margin-left: 10px;
-    }
-
-    .nav .login {
-        display: flex;
-        justify-content: flex-end;
-        justify-items: center;
-        align-items: center;
-    }
-
-    .nav .login .sign {
-        margin: 0 5px;
-        padding: 15px 20px;
-        border-radius: 10px;
-        border: 3px solid var(--main-red-color);
-        transition: 0.7s;
-        cursor: pointer;
-    }
-
-    #up {
-        color: var(--main-white-color);
-        background: var(--main-dark-blue-color);
-    }
-
-    #up:hover {
-        color: var(--main-red-color);
-        background: var(--main-white-color);
-
-    }
-
-    #in:hover {
-        color: var(--main-white-color);
     }
 
     /* --- Main --- */

@@ -1,6 +1,6 @@
 <template lang="html">
     <div id="home">
-        <h1>404 Page Not Found</h1>
+        content
     </div>
 </template>
 
@@ -12,6 +12,6 @@
 
 <style lang="css" scoped>
     #home {
-
+        padding: 30px;
     }
 </style>
