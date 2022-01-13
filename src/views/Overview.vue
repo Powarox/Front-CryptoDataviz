@@ -16,13 +16,13 @@
             </div>
             <div class="rows"  v-for="row in this.data" v-bind:key="row.Name">
                 <h3>{{ row.Name }}</h3>
-                <h3>{{ row.Amounts }}</h3>
-                <h3>{{ row.Coins }}</h3>
-                <h3>{{ row.CurrentPrice }}</h3>
-                <h3>{{ row.MarketValue }}</h3>
-                <h3>{{ row.Profits.toLocaleString('fr-FR') }}</h3>
-                <h3>{{ row.ROI }}</h3>
-                <h3>{{ row.Apps }}</h3>
+                <h3>{{ row.Amounts.toLocaleString('fr-FR') }} $</h3>
+                <h3>{{ row.Coins.toLocaleString('fr-FR') }}</h3>
+                <h3>{{ row.MarketPrice.toLocaleString('fr-FR') }} $</h3>
+                <h3>{{ row.MarketValue.toLocaleString('fr-FR') }} $</h3>
+                <h3>{{ row.ProfitsUsd.toLocaleString('fr-FR') }} $</h3>
+                <h3>{{ row.ProfitsPer }}</h3>
+                <h3>{{ row.App }}</h3>
             </div>
         </section>
 

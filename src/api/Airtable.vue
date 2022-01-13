@@ -33,8 +33,8 @@
                         'Coins': response[res].fields['Coins'],
                         'MarketPrice': response[res].fields['Market Price'],
                         'MarketValue': response[res].fields['Market Value'],
-                        'Profits$': response[res].fields['Profits $'],
-                        'Profits%': response[res].fields['Profits %'],
+                        'ProfitsUsd': response[res].fields['Profits $'],
+                        'ProfitsPer': response[res].fields['Profits %'],
                         'App': response[res].fields['App'][0],
                     }
                 }
