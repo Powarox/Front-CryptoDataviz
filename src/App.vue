@@ -23,12 +23,14 @@
 </template>
 
 <script>
+    import Airtable from './api/Airtable.vue';
     import Footer from './components/Footer.vue';
     import Feedback from './components/Feedback.vue';
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
         name: 'App',
+        mixins: [Airtable],
         components: {
             Footer, Feedback,
         },
