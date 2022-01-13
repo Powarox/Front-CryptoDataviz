@@ -23,7 +23,6 @@
         mounted() {
             const base = new Airtable({apiKey: 'keyninpGxob6oPycb'}).base('appuxrEpFcUYHpYGu');
             base('Wallet').select({
-                // maxRecords: 3,
                 view: "Grid view"
             }).eachPage(response => {
                 for(let res in response) {

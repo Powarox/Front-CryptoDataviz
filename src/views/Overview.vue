@@ -21,7 +21,7 @@
                 <h3>{{ row.MarketPrice.toLocaleString('fr-FR') }} $</h3>
                 <h3>{{ row.MarketValue.toLocaleString('fr-FR') }} $</h3>
                 <h3>{{ row.ProfitsUsd.toLocaleString('fr-FR') }} $</h3>
-                <h3>{{ row.ProfitsPer }}</h3>
+                <h3>{{ row.ProfitsPer.toLocaleString('fr-FR')  }} %</h3>
                 <h3>{{ row.App }}</h3>
             </div>
         </section>
@@ -54,6 +54,11 @@
             findWallet(){
                 this.data = this.getData();
                 console.log(this.data);
+                for(let rows in this.data){
+                    this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
+                    this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;
+                    this.data[rows].ProfitsPer = (this.data[rows].MarketValue / this.data[rows].Amounts - 1)*100;
+                }
             }
         },
         computed: {
