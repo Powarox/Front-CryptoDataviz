@@ -4,7 +4,7 @@
 
         <section class="views">
             <h2>Mes Actifs</h2>
-            <div class="filter">
+            <div class="rows">
                 <h3>Name</h3>
                 <h3>Amounts</h3>
                 <h3>Coins</h3>
@@ -15,13 +15,16 @@
                 <h3>App</h3>
             </div>
             <div class="rows"  v-for="row in this.data" v-bind:key="row.Name">
-                <h3>{{ row.Name }}</h3>
+                <div class="cryptoName">
+                    <img :src="getImgUrl(row.Name)" alt="">
+                    <h3>{{ row.Name }}</h3>
+                </div>
                 <h3>{{ row.Amounts.toLocaleString('fr-FR') }} $</h3>
                 <h3>{{ row.Coins.toLocaleString('fr-FR') }}</h3>
                 <h3>{{ row.MarketPrice.toLocaleString('fr-FR') }} $</h3>
                 <h3>{{ row.MarketValue.toLocaleString('fr-FR') }} $</h3>
                 <h3>{{ row.ProfitsUsd.toLocaleString('fr-FR') }} $</h3>
-                <h3>{{ row.ProfitsPer.toLocaleString('fr-FR')  }} %</h3>
+                <h3>{{ row.ProfitsPer.toLocaleString('fr-FR') }} %</h3>
                 <h3>{{ row.App }}</h3>
             </div>
         </section>
@@ -40,6 +43,7 @@
         data() {
             return {
                 data: {},
+                img: 'ADA.png',
                 succes: false,
             }
         },
@@ -50,8 +54,7 @@
             ...mapGetters([
                 'getData', 'getFeedback', 'getMessage',
             ]),
-
-            findWallet(){
+            findWallet() {
                 this.data = this.getData();
                 console.log(this.data);
                 for(let rows in this.data){
@@ -59,7 +62,10 @@
                     this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;
                     this.data[rows].ProfitsPer = (this.data[rows].MarketValue / this.data[rows].Amounts - 1)*100;
                 }
-            }
+            },
+            getImgUrl(pic) {
+                return require('../assets/crypto/'+pic+'.png')
+            },
         },
         computed: {
         }
@@ -76,13 +82,7 @@
     .views {
         display: grid;
         grid-template-columns: 1fr;
-    }
-
-    .views .filter {
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        align-items: center;
-        justify-items: center;
+        grid-gap: 5px;
     }
 
     .views .rows {
@@ -90,5 +90,16 @@
         grid-template-columns: repeat(8, 1fr);
         align-items: center;
         justify-items: center;
+    }
+
+    .views .rows .cryptoName {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .views .rows img {
+        width: 65%;
     }
 </style>
