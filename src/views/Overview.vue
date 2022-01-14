@@ -23,8 +23,18 @@
                 <h3>{{ row.Coins.toLocaleString('fr-FR') }}</h3>
                 <h3>{{ row.MarketPrice.toLocaleString('fr-FR') }} $</h3>
                 <h3>{{ row.MarketValue.toLocaleString('fr-FR') }} $</h3>
-                <h3>{{ row.ProfitsUsd.toLocaleString('fr-FR') }} $</h3>
-                <h3>{{ row.ProfitsPer.toLocaleString('fr-FR') }} %</h3>
+                <h3 v-if="row.ProfitsUsd < 0 ">
+                    <span>{{ row.ProfitsUsd.toLocaleString('fr-FR') }} $</span>
+                </h3>
+                <h3 v-else>
+                    {{ row.ProfitsUsd.toLocaleString('fr-FR') }} $
+                </h3>
+                <h3 v-if="row.ProfitsUsd < 0 ">
+                    <span>{{ row.ProfitsPer.toLocaleString('fr-FR') }} %</span>
+                </h3>
+                <h3 v-else>
+                    {{ row.ProfitsPer.toLocaleString('fr-FR') }} %
+                </h3>
                 <h3>{{ row.App }}</h3>
             </div>
         </section>
@@ -79,6 +89,10 @@
         padding: 30px;
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    span {
+        color: red;
     }
 
     .views {
