@@ -8,7 +8,7 @@
                 <h3>Name</h3>
                 <h3>Amounts</h3>
                 <h3>Coins</h3>
-                <h3>Current Price</h3>
+                <h3>Market Price</h3>
                 <h3>Market Value</h3>
                 <h3>Profits $</h3>
                 <h3>Profits %</h3>
