@@ -43,20 +43,22 @@
         data() {
             return {
                 data: {},
-                img: 'ADA.png',
-                succes: false,
+                price: {},
             }
         },
         methods: {
             ...mapActions([
-                'updateData', 'addMessage', 'addFeedback', 'delFeedback',
+                'updateData', 'updatePrice', 'addMessage', 'addFeedback', 'delFeedback',
             ]),
             ...mapGetters([
-                'getData', 'getFeedback', 'getMessage',
+                'getData', 'getPrice', 'getFeedback', 'getMessage',
             ]),
             findWallet() {
                 this.data = this.getData();
+                this.price = this.getPrice();
                 console.log(this.data);
+                console.log(this.price);
+
                 for(let rows in this.data){
                     this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
                     this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;

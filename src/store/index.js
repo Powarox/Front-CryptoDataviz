@@ -7,12 +7,16 @@ export const store = createStore({
             loading: false,
             message: '',
             data: {},
+            price: {},
         }
     },
 
     getters: {
         getData(state) {
             return state.data;
+        },
+        getPrice(state) {
+            return state.price;
         },
         getFeedback(state) {
             return state.feedback;
@@ -28,6 +32,9 @@ export const store = createStore({
     actions: {
         updateData({commit}, data){
             commit('UPDATEDATA', data);
+        },
+        updatePrice({commit}, price){
+            commit('UPDATEPRICE', price);
         },
         addMessage({commit}, mess){
             commit('ADDMESSAGE', mess);
@@ -49,6 +56,9 @@ export const store = createStore({
     mutations: {
         UPDATEDATA(state, data) {
             state.data = data;
+        },
+        UPDATEPRICE(state, price) {
+            state.price = price;
         },
         ADDMESSAGE(state, mess) {
             state.message = mess;
