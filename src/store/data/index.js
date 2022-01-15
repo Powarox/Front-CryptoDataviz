@@ -1,13 +1,12 @@
-import { createStore } from "vuex";
 
-export const store = createStore({
+export default {
     state() {
         return {
             feedback: false,
             loading: false,
             message: '',
             data: {},
-            price: {},
+            // price: {},
         }
     },
 
@@ -15,9 +14,9 @@ export const store = createStore({
         getData(state) {
             return state.data;
         },
-        getPrice(state) {
-            return state.price;
-        },
+        // getPrice(state) {
+        //     return state.price;
+        // },
         getFeedback(state) {
             return state.feedback;
         },
@@ -33,9 +32,9 @@ export const store = createStore({
         updateData({commit}, data){
             commit('UPDATEDATA', data);
         },
-        updatePrice({commit}, price){
-            commit('UPDATEPRICE', price);
-        },
+        // updatePrice({commit}, price){
+        //     commit('UPDATEPRICE', price);
+        // },
         addMessage({commit}, mess){
             commit('ADDMESSAGE', mess);
         },
@@ -57,9 +56,9 @@ export const store = createStore({
         UPDATEDATA(state, data) {
             state.data = data;
         },
-        UPDATEPRICE(state, price) {
-            state.price = price;
-        },
+        // UPDATEPRICE(state, price) {
+        //     state.price = price;
+        // },
         ADDMESSAGE(state, mess) {
             state.message = mess;
         },
@@ -76,4 +75,4 @@ export const store = createStore({
             state.feedback = false;
         }
     }
-});
+}

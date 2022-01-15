@@ -26,23 +26,26 @@
 
 <script>
     import Airtable from './api/Airtable.vue';
-    import CoinGecko from './api/CoinGecko.vue';
+    // import CoinGecko from './api/CoinGecko.vue';
     import Footer from './components/Footer.vue';
     import Feedback from './components/Feedback.vue';
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
         name: 'App',
-        mixins: [CoinGecko, Airtable],
+        mixins: [Airtable],
         components: {
             Footer, Feedback,
         },
+        beforeMount() {
+            this.updatePrice();
+        },
         methods: {
             ...mapActions([
-                'updateData', 'addMessage', 'addFeedback', 'delFeedback',
+                'updateData', 'updatePrice', 'addMessage', 'addFeedback', 'delFeedback',
             ]),
             ...mapGetters([
-                'getData', 'getFeedback', 'getMessage',
+                'getData', 'getPrice', 'getFeedback', 'getMessage',
             ]),
             addFeed(){
                 this.addMessage('En cours de developpement...');

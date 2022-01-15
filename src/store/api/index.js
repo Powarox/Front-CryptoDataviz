@@ -1,12 +1,32 @@
-import state from './state'
-import * as getters from './getters'
-import * as mutations from './mutations'
-import * as actions from './actions'
+import CoinGecko from 'coingecko-api';
 
 export default {
-  namespaced: true,
-  getters,
-  mutations,
-  actions,
-  state
+    state() {
+        return {
+            price: {},
+        }
+    },
+    getters: {
+        getPrice(state) {
+            return state.price;
+        },
+    },
+    actions: {
+        updatePrice({commit}){
+            const CoinGeckoClient = new CoinGecko();
+            let func = async() => {
+                let data = await CoinGeckoClient.simple.price({
+                    ids: ['swissborg', 'the-graph', 'ripple', 'polkadot', 'chiliz', 'matic-network', 'mimo-parallel-governance-token', 'enjincoin', 'Uniswap', 'republic-protocol', 'utrust', 'kyber-network', 'chainlink', 'audiocoin', 'binancecoin', 'aave', 'compound-usdt', 'qtum', 'lisk', 'tron', 'cosmos', 'eos', 'icon', 'ethereum-classic', 'cardano', 'kava', 'stellar', 'vechain', 'bittorrent-2', 'ankr', 'zilliqa', 'pancakeswap-token', 'theta-token'],
+                    vs_currencies: ['usd'],
+                });
+                commit('UPDATEPRICE', data);
+            };
+            func();
+        },
+    },
+    mutations: {
+        UPDATEPRICE(state, price) {
+            state.price = price;
+        },
+    }
 }

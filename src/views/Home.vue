@@ -1,6 +1,7 @@
 <template lang="html">
     <div id="home">
         <button @click="test()">test</button>
+        <button @click="test2()">test2</button>
     </div>
 </template>
 
@@ -9,6 +10,7 @@
     // import Airtable from "airtable";
     // import CoinGecko from 'coingecko-api';
     // import coinGeckoRequest from '../api/CoinGecko.js';
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
         name: 'Home',
@@ -20,8 +22,18 @@
             }
         },
         methods: {
+            ...mapActions([
+                'updateData', 'updatePrice', 'addMessage', 'addFeedback', 'delFeedback',
+            ]),
+            ...mapGetters([
+                'getData', 'getPrice', 'getFeedback', 'getMessage',
+            ]),
             test(){
-                // console.log(coinGeckoRequest());
+                this.updatePrice();
+            },
+            test2(){
+                let d = this.getPrice();
+                console.log(d);
             }
         },
     }

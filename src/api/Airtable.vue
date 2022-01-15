@@ -35,6 +35,7 @@
                         'ProfitsUsd': response[res].fields['Profits $'],
                         'ProfitsPer': response[res].fields['Profits %'],
                         'App': response[res].fields['App'][0],
+                        'id': response[res].fields['id'],
                     }
                 }
                 this.updateStore();

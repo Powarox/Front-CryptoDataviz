@@ -1,7 +1,7 @@
-import {createStore} from 'vuex'
+import {createStore} from 'vuex';
 
-import data from './data'
-import api from './api'
+import api from './api';
+import data from './data';
 
 export const store = createStore({
     debug : true,
