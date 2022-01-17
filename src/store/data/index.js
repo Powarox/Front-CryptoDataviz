@@ -6,7 +6,6 @@ export default {
             loading: false,
             message: '',
             data: {},
-            // price: {},
         }
     },
 
@@ -14,9 +13,6 @@ export default {
         getData(state) {
             return state.data;
         },
-        // getPrice(state) {
-        //     return state.price;
-        // },
         getFeedback(state) {
             return state.feedback;
         },
@@ -32,9 +28,6 @@ export default {
         updateData({commit}, data){
             commit('UPDATEDATA', data);
         },
-        // updatePrice({commit}, price){
-        //     commit('UPDATEPRICE', price);
-        // },
         addMessage({commit}, mess){
             commit('ADDMESSAGE', mess);
         },
@@ -56,9 +49,6 @@ export default {
         UPDATEDATA(state, data) {
             state.data = data;
         },
-        // UPDATEPRICE(state, price) {
-        //     state.price = price;
-        // },
         ADDMESSAGE(state, mess) {
             state.message = mess;
         },

@@ -1,26 +1,31 @@
 <template>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
-
     <div id="app">
-        <div class="nav">
-            <div class="page">
+        <nav class="navigation">
+            <section class="nav">
                 <router-link to="/" id="logo">
                     <img src="./assets/logo.png" alt="Logo">
                     <p>CryptoWallet</p>
                 </router-link>
-                <router-link to="/">Wallet</router-link>
-                <router-link to="/Overview">Overview</router-link>
-                <router-link to="/">Transaction</router-link>
-            </div>
-        </div>
+                <router-link to="/"><i class="fas fa-wallet"></i> Wallet</router-link>
+                <router-link to="/Overview"><i class="far fa-chart-bar"></i> Overview</router-link>
+                <router-link to="/Overview"><i class="fas fa-chart-pie"></i> Analytics</router-link>
+                <router-link to="/"><i class="fas fa-exchange-alt"></i> Transaction</router-link>
+                <router-link to="/"><i class="fas fa-history"></i> History</router-link>
+            </section>
+            <section class="connexion" @click="addFeed()">
+                <router-link to="/"><i class="fas fa-wallet"></i> Connect Wallet</router-link>
+            </section>
+        </nav>
 
-        <Feedback @click="delFeed()"/>
-
-        <div class="main">
+        <main class="main">
+            <Feedback @click="delFeed()"/>
             <router-view/>
-        </div>
+        </main>
 
-        <Footer/>
+        <footer class="footer">
+            <Footer/>
+        </footer>
     </div>
 </template>
 
@@ -63,6 +68,7 @@
         --main-first-color: #41B883;
         --main-second-color: #35495E;
 
+        --main-red-color: #FB565E;
         --main-blue-color: #348AF4;
         --main-grey-color: #333;
         --main-white-color: #FFF;
@@ -78,72 +84,103 @@
 
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
         color: var(--main-dark-blue-color);
         margin: 0;
     }
 
-    body {
-        margin: 0;
-    }
+    body { margin: 0; }
 
-    /* --- Navigation Bar --- */
-    .nav {
+    .navigation {
+        height: 100vh;
         margin: 0;
         padding: 10px;
-        display: grid;
-        grid-template-columns: 3fr 1fr;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         background: var(--main-first-color);
         font-weight: bold;
+        position: fixed;
     }
 
-    .nav .page {
-        display: flex;
-        justify-content: left;
-        align-items: center;
+    .navigation i {
+        margin: 0 5px;
     }
 
-    .nav a {
+    .navigation a {
         margin: 0 10px;
-        padding: 10px 20px;
+        padding: 10px 15px;
         text-decoration: none;
         color: #333;
-        border-bottom: 3px solid var(--main-first-color);
         transition: 0.5s;
     }
 
-    .nav a:hover {
-        border-bottom: 3px solid white;
+    .navigation a:hover {
+        background: var(--main-white-color);
+        border-radius: 10px;
     }
 
-    .nav #logo {
+    .navigation .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navigation .nav #logo {
         display: flex;
         justify-items: center;
         align-items: center;
-        background: var(--main-white-color);
-        border-radius: 10px;
-        border: 3px solid var(--main-first-color);
-    }
-
-    .nav #logo:hover {
         color: var(--main-white-color);
         background: var(--main-second-color);
         border: 3px solid var(--main-second-color);
+        border-radius: 10px;
     }
 
-    .nav #logo img {
+    .navigation .nav #logo:hover {
+        color: var(--main-second-color);
+        background: var(--main-white-color);
+        border: 3px solid var(--main-first-color);
+    }
+
+    .navigation .nav #logo img {
         width: 30px;
     }
 
-    .nav #logo p {
+    .navigation .nav #logo p {
         margin: 0;
         margin-left: 10px;
     }
 
-    /* --- Main --- */
+    .navigation .connexion {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .navigation .connexion a {
+        margin: 0 5px;
+        padding: 15px;
+        border-radius: 10px;
+        color: var(--main-second-color);
+        background: var(--main-white-color);
+        transition: 0.7s;
+        cursor: pointer;
+    }
+
+    .navigation .connexion a:hover {
+        color: var(--main-white-color);
+        background: var(--main-second-color);
+    }
+
+
     .main {
-        min-height: 500px;
+        margin-left: 210px;
         background: var(--main-body-color);
+    }
+
+    .footer {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
 </style>

@@ -21,19 +21,19 @@
                 </div>
                 <h3>{{ row.Amounts.toLocaleString('fr-FR') }} $</h3>
                 <h3>{{ row.Coins.toLocaleString('fr-FR') }}</h3>
-                <h3>{{ row.MarketPrice.toLocaleString('fr-FR') }} $</h3>
-                <h3>{{ row.MarketValue.toLocaleString('fr-FR') }} $</h3>
+                <h3>{{ row.MarketPrice.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</h3>
+                <h3>{{ row.MarketValue.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</h3>
                 <h3 v-if="row.ProfitsUsd < 0 ">
-                    <span>{{ row.ProfitsUsd.toLocaleString('fr-FR') }} $</span>
+                    <span id="red">{{ row.ProfitsUsd.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</span>
                 </h3>
                 <h3 v-else>
-                    {{ row.ProfitsUsd.toLocaleString('fr-FR') }} $
+                    <span id="green">{{ row.ProfitsUsd.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</span>
                 </h3>
                 <h3 v-if="row.ProfitsUsd < 0 ">
-                    <span>{{ row.ProfitsPer.toLocaleString('fr-FR') }} %</span>
+                    <span id="red">{{ row.ProfitsPer.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} %</span>
                 </h3>
                 <h3 v-else>
-                    {{ row.ProfitsPer.toLocaleString('fr-FR') }} %
+                    <span id="green">{{ row.ProfitsPer.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} %</span>
                 </h3>
                 <h3>{{ row.App }}</h3>
             </div>
@@ -56,6 +56,9 @@
                 price: {},
             }
         },
+        beforeMount() {
+            this.findWallet();
+        },
         methods: {
             ...mapActions([
                 'updateData', 'updatePrice', 'addMessage', 'addFeedback', 'delFeedback',
@@ -69,7 +72,14 @@
                 console.log(this.data);
                 console.log(this.price);
 
+                // console.log(this.price.data['ripple']);
+
                 for(let rows in this.data){
+
+                    // console.log(this.data[rows].id);
+                    // console.log(this.price.data[this.data[rows].id]);
+
+                    this.data[rows].MarketPrice = this.price.data[this.data[rows].id].usd;
                     this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
                     this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;
                     this.data[rows].ProfitsPer = (this.data[rows].MarketValue / this.data[rows].Amounts - 1)*100;
@@ -89,6 +99,14 @@
         padding: 30px;
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    #red {
+        color: var(--main-red-color);
+    }
+
+    #green {
+        color: var(--main-first-color);
     }
 
     span {
