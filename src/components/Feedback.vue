@@ -5,7 +5,7 @@
                     <p><i class="fas fa-times"></i> {{ this.getMessage }}</p>
                 </div>
             </transition>
-        <div v-if="change && loading">
+        <div v-if="change && !loading">
             {{ check() }}
         </div>
     </div>
@@ -17,14 +17,10 @@
     export default {
         name: "Feedback",
         methods: {
-            ...mapActions('airtable', [
-                'addFeedback', 'delFeedback',
-            ]),
-
+            ...mapActions(['addFeedback', 'delFeedback']),
             del(){
                 this.delFeedback;
             },
-
             check() {
                 setTimeout(() => {
                     this.delFeedback();
@@ -32,14 +28,10 @@
             }
         },
         computed: {
-            ...mapGetters('airtable', [
-                'getFeedback', 'getMessage', 'getLoading',
-            ]),
-
+            ...mapGetters(['getFeedback', 'getMessage', 'getLoading']),
             change() {
                 return this.getFeedback;
             },
-
             loading() {
                 return this.getLoading;
             }
