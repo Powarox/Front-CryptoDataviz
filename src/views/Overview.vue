@@ -70,9 +70,6 @@
             findWallet() {
                 this.data = this.getData();
                 this.price = this.getPrice();
-                console.log(this.data);
-                console.log(this.price);
-
                 for(let rows in this.data){
                     this.data[rows].MarketPrice = this.price.data[this.data[rows].id].usd;
                     this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
