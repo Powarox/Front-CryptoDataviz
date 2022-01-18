@@ -1,12 +1,13 @@
 import {createStore} from 'vuex';
 
-import api from './api';
-import data from './data';
+import airtable from './airtable';
+import coinGecko from './coinGecko';
+
 
 export const store = createStore({
     debug : true,
     modules: {
-        api,
-        data
+        airtable,
+        coinGecko,
       },
  })
