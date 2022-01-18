@@ -25,24 +25,3 @@ export function fetchDataBase({commit}) {
         if(err) { console.error(err); return; }
     });
 }
-
-// --- Feedback ---
-export function addMessage({commit}, mess) {
-    commit('ADDMESSAGE', mess);
-}
-
-export function addLoading({commit}) {
-    commit('ADDLOADING');
-}
-
-export function delLoading({commit}) {
-    commit('DELLOADING');
-}
-
-export function addFeedback({commit}) {
-    commit('ADDFEEDBACK');
-}
-
-export function delFeedback({commit}) {
-    commit('DELFEEDBACK');
-}
