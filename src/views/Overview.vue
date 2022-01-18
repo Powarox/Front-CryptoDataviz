@@ -60,9 +60,6 @@
             this.fetchDataBase();
             this.fetchPrice();
         },
-        // beforeMount() {
-        //     this.findWallet();
-        // },
         methods: {
             ...mapActions([
                 'fetchPrice',
