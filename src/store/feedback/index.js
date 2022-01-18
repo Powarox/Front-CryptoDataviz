@@ -3,7 +3,6 @@ export default {
     state() {
         return {
             feedback: false,
-            loading: false,
             message: '',
         }
     },
@@ -14,19 +13,10 @@ export default {
         getMessage(state) {
             return state.message;
         },
-        getLoading(state) {
-            return state.loading;
-        },
     },
     actions: {
         addMessage({commit}, mess) {
             commit('ADDMESSAGE', mess);
-        },
-        addLoading({commit}) {
-            commit('ADDLOADING');
-        },
-        delLoading({commit}) {
-            commit('DELLOADING');
         },
         addFeedback({commit}) {
             commit('ADDFEEDBACK');
@@ -38,12 +28,6 @@ export default {
     mutations: {
         ADDMESSAGE(state, message) {
             state.message = message;
-        },
-        ADDLOADING(state) {
-            state.loading = false;
-        },
-        DELLOADING(state) {
-            state.loading = true;
         },
         ADDFEEDBACK(state) {
             state.feedback = true;

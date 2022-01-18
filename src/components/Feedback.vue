@@ -5,7 +5,7 @@
                     <p><i class="fas fa-times"></i> {{ this.getMessage }}</p>
                 </div>
             </transition>
-        <div v-if="change && !loading">
+        <div v-if="change">
             {{ check() }}
         </div>
     </div>
@@ -17,7 +17,7 @@
     export default {
         name: "Feedback",
         methods: {
-            ...mapActions(['addFeedback', 'delFeedback']),
+            ...mapActions(['addMessage', 'addFeedback', 'delFeedback']),
             del(){
                 this.delFeedback;
             },
@@ -28,12 +28,15 @@
             }
         },
         computed: {
-            ...mapGetters(['getFeedback', 'getMessage', 'getLoading']),
+            ...mapGetters(['getFeedback', 'getMessage', 'getLoadData', 'getLoadPrice']),
             change() {
                 return this.getFeedback;
             },
-            loading() {
-                return this.getLoading;
+            loadData() {
+                return this.getLoadData;
+            },
+            loadPrice() {
+                return this.getLoadPrice;
             }
         }
     }
