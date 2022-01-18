@@ -39,8 +39,14 @@
         components: {
             Footer, Feedback,
         },
+        created() {
+            this.fetchDataBase();
+            this.fetchPrice();
+        },
         methods: {
-            ...mapActions(['addMessage', 'addFeedback', 'delFeedback']),
+            ...mapActions([
+                'fetchDataBase', 'fetchPrice','addMessage', 'addFeedback', 'delFeedback'
+            ]),
             addFeed() {
                 this.addMessage('En cours de developpement...');
                 this.addFeedback();

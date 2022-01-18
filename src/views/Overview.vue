@@ -2,7 +2,8 @@
     <div id="overview">
         <button @click="findWallet()">load</button>
 
-        <section class="views">
+        <section class="views" v-if="loading">
+            {{ findWallet() }}
             <h2>Mes Actifs</h2>
             <div class="rows">
                 <h3>Name</h3>
@@ -56,22 +57,15 @@
                 price: {},
             }
         },
-        created() {
-            this.fetchDataBase();
-            this.fetchPrice();
+        updated() {
+            this.findWallet();
         },
         methods: {
             ...mapActions([
-                'fetchPrice',
+                'fetchDataBase', 'fetchPrice',
             ]),
             ...mapGetters([
-                'getPrice',
-            ]),
-            ...mapActions('airtable', [
-                'fetchDataBase', 'addMessage', 'addLoading', 'addFeedback', 'delFeedback',
-            ]),
-            ...mapGetters('airtable', [
-                'getData', 'getFeedback', 'getMessage', 'getLoading'
+                'getData', 'getPrice',
             ]),
             findWallet() {
                 this.data = this.getData();
@@ -79,13 +73,7 @@
                 console.log(this.data);
                 console.log(this.price);
 
-                // console.log(this.price.data['ripple']);
-
                 for(let rows in this.data){
-
-                    // console.log(this.data[rows].id);
-                    // console.log(this.price.data[this.data[rows].id]);
-
                     this.data[rows].MarketPrice = this.price.data[this.data[rows].id].usd;
                     this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
                     this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;
@@ -97,6 +85,12 @@
             },
         },
         computed: {
+            ...mapGetters([
+                'getLoadData', 'getLoadPrice',
+            ]),
+            loading() {
+                return this.getLoadData && this.getLoadPrice;
+            },
         }
     }
 </script>

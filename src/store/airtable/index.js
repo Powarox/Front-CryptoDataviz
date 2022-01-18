@@ -4,16 +4,19 @@ export default {
     state() {
         return {
             data: {},
+            loadData: false,
         };
     },
     getters: {
         getData(state) {
             return state.data;
-        }
+        },
+        getLoadData(state) {
+            return state.loadData;
+        },
     },
     actions: {
         fetchDataBase({commit}) {
-            console.log('get data from Airtable');
             airtableBase('Wallet').select({
                 view: "Grid view"
             }).eachPage(response => {
@@ -41,6 +44,7 @@ export default {
     mutations: {
         UPDATEDATA(state, data) {
             state.data = data;
+            state.loadData = true;
         }
     }
 }

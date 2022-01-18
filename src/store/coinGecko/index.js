@@ -4,11 +4,15 @@ export default {
     state() {
         return {
             price: {},
+            loadPrice: false,
         }
     },
     getters: {
         getPrice(state) {
             return state.price;
+        },
+        getLoadPrice(state) {
+            return state.loadPrice;
         },
     },
     actions: {
@@ -27,6 +31,7 @@ export default {
     mutations: {
         UPDATEPRICE(state, price) {
             state.price = price;
+            state.loadPrice = true;
         },
     }
 }
