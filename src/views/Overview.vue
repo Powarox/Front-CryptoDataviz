@@ -71,7 +71,7 @@
                 this.data = this.getData();
                 this.price = this.getPrice();
                 for(let rows in this.data){
-                    this.data[rows].MarketPrice = this.price.data[this.data[rows].id].usd;
+                    this.data[rows].MarketPrice = this.price.data[this.data[rows].PriceName].usd;
                     this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
                     this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;
                     this.data[rows].ProfitsPer = (this.data[rows].MarketValue / this.data[rows].Amounts - 1)*100;

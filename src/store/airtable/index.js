@@ -31,7 +31,8 @@ export default {
                         'ProfitsUsd': response[res].fields['Profits $'],
                         'ProfitsPer': response[res].fields['Profits %'],
                         'App': response[res].fields['App'][0],
-                        'id': response[res].fields['id'],
+                        'PriceName': response[res].fields['Price Name'],
+                        'Identifiant': response[res].id,
                     }
                 }
                 commit('UPDATEDATA', data);
@@ -39,7 +40,8 @@ export default {
             function done(err) {
                 if(err) { console.error(err); return; }
             });
-        }
+        },
+
     },
     mutations: {
         UPDATEDATA(state, data) {
