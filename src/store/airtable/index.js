@@ -41,12 +41,41 @@ export default {
                 if(err) { console.error(err); return; }
             });
         },
-
+        updateDataBaseField({commit}) {
+            airtableBase('Wallet').update([
+                {
+                    "id": "recaFYnnYfo4oXulG",
+                    "fields": {
+                        "Name": "CHSB",
+                        "Amounts": 465,
+                        "Coins": 775.2,
+                        "App": [
+                            "SwissBorg"
+                        ],
+                        "Market Value": 0,
+                        "Market Price": 0,
+                        "Profits $": 0,
+                        "Profits %": 0,
+                        "id": "swissborg"
+                    }
+                }
+            ],
+            function(err, records) {
+                if(err) { console.error(err); return; }
+                records.forEach(function(record) {
+                    console.log(record.get('App'));
+                });
+            });
+            commit('UPDATEFIELD');
+        }
     },
     mutations: {
         UPDATEDATA(state, data) {
             state.data = data;
             state.loadData = true;
-        }
+        },
+        UPDATEFIELD(state) {
+            console.log(state.data);
+        },
     }
 }
