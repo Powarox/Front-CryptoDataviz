@@ -1,6 +1,7 @@
 import airtableBase from "@/api/Airtable";
 
 export function fetchDataBase({commit}) {
+    console.log('get data from Airtable');
     airtableBase('Wallet').select({
         view: "Grid view"
     }).eachPage(response => {

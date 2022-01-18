@@ -17,7 +17,7 @@
     export default {
         name: "Feedback",
         methods: {
-            ...mapActions([
+            ...mapActions('airtable', [
                 'addFeedback', 'delFeedback',
             ]),
 
@@ -32,7 +32,7 @@
             }
         },
         computed: {
-            ...mapGetters([
+            ...mapGetters('airtable', [
                 'getFeedback', 'getMessage', 'getLoading',
             ]),
 

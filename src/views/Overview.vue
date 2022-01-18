@@ -56,15 +56,25 @@
                 price: {},
             }
         },
-        beforeMount() {
-            this.findWallet();
+        created() {
+            this.fetchDataBase();
+            this.fetchPrice();
         },
+        // beforeMount() {
+        //     this.findWallet();
+        // },
         methods: {
             ...mapActions([
-                'updateData', 'updatePrice', 'addMessage', 'addFeedback', 'delFeedback',
+                'fetchPrice',
             ]),
             ...mapGetters([
-                'getData', 'getPrice', 'getFeedback', 'getMessage',
+                'getPrice',
+            ]),
+            ...mapActions('airtable', [
+                'fetchDataBase', 'addMessage', 'addLoading', 'addFeedback', 'delFeedback',
+            ]),
+            ...mapGetters('airtable', [
+                'getData', 'getFeedback', 'getMessage', 'getLoading'
             ]),
             findWallet() {
                 this.data = this.getData();

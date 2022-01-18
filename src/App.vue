@@ -14,7 +14,7 @@
                 <router-link to="/Overview"><i class="fas fa-history"></i> History</router-link>
             </section>
             <section class="connexion" @click="addFeed()">
-                <router-link to="/"><i class="fas fa-wallet"></i> Connect Wallet</router-link>
+                <router-link to=""><i class="fas fa-wallet"></i> Connect Wallet</router-link>
             </section>
         </nav>
 
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import Airtable from './api/Airtable.vue';
+    // import Airtable from './api/Airtable.vue';
     // import CoinGecko from './api/CoinGecko.vue';
     import Footer from './components/Footer.vue';
     import Feedback from './components/Feedback.vue';
@@ -38,20 +38,28 @@
 
     export default {
         name: 'App',
-        mixins: [Airtable],
+        // mixins: [Airtable],
         components: {
             Footer, Feedback,
         },
-        beforeMount() {
-            this.updatePrice();
-        },
+        // beforeMount() {
+        //     this.fetchDataBase();
+        //     this.updatePrice();
+        // },
         methods: {
             ...mapActions([
-                'updateData', 'updatePrice', 'addMessage', 'addFeedback', 'delFeedback',
+                'updatePrice',
             ]),
             ...mapGetters([
-                'getData', 'getPrice', 'getFeedback', 'getMessage',
+                'fetchPrice',
             ]),
+            ...mapActions('airtable', [
+                'fetchDataBase', 'addMessage', 'addFeedback', 'delFeedback',
+            ]),
+            ...mapGetters('airtable', [
+                'getData', 'getPrice', 'getFeedback', 'getMessage', 'getLoading'
+            ]),
+
             addFeed(){
                 this.addMessage('En cours de developpement...');
                 this.addFeedback();

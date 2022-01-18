@@ -12,7 +12,7 @@ export default {
         },
     },
     actions: {
-        updatePrice({commit}){
+        fetchPrice({commit}){
             const CoinGeckoClient = new CoinGecko();
             let func = async() => {
                 let data = await CoinGeckoClient.simple.price({
