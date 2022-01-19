@@ -3,6 +3,7 @@
         <button @click="test()">test</button>
         <button @click="test2()">test2</button>
     </div>
+    <TransactionCard/>
 </template>
 
 <script>
@@ -11,9 +12,13 @@
     // import CoinGecko from 'coingecko-api';
     // import coinGeckoRequest from '../api/CoinGecko.js';
     import { mapActions, mapGetters } from 'vuex';
+    import TransactionCard from '../components/TransactionCard.vue';
 
     export default {
         name: 'Home',
+        components: {
+            TransactionCard,
+        },
         data() {
             return {
                 data: {},
