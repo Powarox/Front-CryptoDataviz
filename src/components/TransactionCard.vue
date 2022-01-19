@@ -3,9 +3,9 @@
         <h1>Ajouter une transaction</h1>
 
         <div class="actions">
-            <h3 class="item" @click="switchAction('buy')">Acheter</h3>
-            <h3 class="item" @click="switchAction('sell')">Vendre</h3>
-            <h3 class="item" @click="switchAction('exch')">Echanger</h3>
+            <h3 class="item" :class="{active: buy}" @click="switchAction('buy')">Acheter</h3>
+            <h3 class="item" :class="{active: sell}" @click="switchAction('sell')">Vendre</h3>
+            <h3 class="item" :class="{active: exch}" @click="switchAction('exch')">Echanger</h3>
         </div>
 
         <select id="pet-select">
@@ -28,6 +28,14 @@
             </div>
         </div>
 
+        <div class="" v-if="sell">
+            Sell wood
+        </div>
+
+        <div class="" v-if="exch">
+            Exchange
+        </div>
+
         <button type="button" name="button">Ajouter</button>
     </div>
 </template>
@@ -44,7 +52,20 @@
         },
         methods: {
             switchAction(action){
+                if(action === 'buy'){
+                    this.buy = true;
+                    this.sell = false;
+                    this.exch = false;
 
+                } else if(action === 'sell') {
+                    this.buy = false;
+                    this.sell = true;
+                    this.exch = false;
+                } else {
+                    this.buy = false;
+                    this.sell = false;
+                    this.exch = true;
+                }
             }
         }
     }
@@ -93,7 +114,7 @@
         background: #555;
     }
 
-    .actions .item:focus {
+    .actions .active {
         background: #555;
     }
 
