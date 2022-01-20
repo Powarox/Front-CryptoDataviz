@@ -5,7 +5,7 @@
         <div class="actions">
             <h3 class="item" :class="{active: buy}" @click="switchAction('buy')">Acheter</h3>
             <h3 class="item" :class="{active: sell}" @click="switchAction('sell')">Vendre</h3>
-            <h3 class="item" :class="{active: exch}" @click="switchAction('exch')">Echanger</h3>
+            <h3 class="item" :class="{active: tran}" @click="switchAction('tran')">Transférer</h3>
         </div>
 
         <select id="pet-select">
@@ -32,7 +32,7 @@
             Sell wood
         </div>
 
-        <div class="" v-if="exch">
+        <div class="" v-if="tran">
             Exchange
         </div>
 
@@ -47,7 +47,7 @@
             return {
                 buy: true,
                 sell: false,
-                exch: false,
+                tran: false,
             }
         },
         methods: {
@@ -55,16 +55,16 @@
                 if(action === 'buy'){
                     this.buy = true;
                     this.sell = false;
-                    this.exch = false;
+                    this.tran = false;
 
                 } else if(action === 'sell') {
                     this.buy = false;
                     this.sell = true;
-                    this.exch = false;
+                    this.tran = false;
                 } else {
                     this.buy = false;
                     this.sell = false;
-                    this.exch = true;
+                    this.tran = true;
                 }
             }
         }

@@ -35,6 +35,7 @@ export default {
                         'Identifiant': response[res].id,
                     }
                 }
+                console.log(data);
                 commit('UPDATEDATA', data);
             },
             function done(err) {
