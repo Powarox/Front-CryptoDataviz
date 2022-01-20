@@ -43,6 +43,41 @@ export default {
             });
         },
 
+        transactionBuy({commit, state}, list){
+            airtableBase('Transaction Buy').create([{
+                "fields": {
+                    "Date": "2022-01-20T16:33:00.000Z",
+                    "Name": "BTC",
+                    "Amount": 20,
+                    "Coins": 35,
+                    "Platform": "SwissBorg",
+                    "Coins ID": "recDjIYfWcxwbOwQH"
+                }
+            }],
+            function(err, records) {
+                if(err) { console.error(err); return; }
+                records.forEach(function (record) { console.log(record.getId()); });
+            });
+            airtableBase('Wallet').update([{
+                "id": "recaFYnnYfo4oXulG",
+                "fields": {
+                    "Name": "CHSB",
+                    "Amounts": 465,
+                    "Coins": 775.2,
+                    // "App": "SwissBorg",
+                    // "Market Price": 0.570981,
+                    // "Price Name": "swissborg"
+                }
+            }],
+            function(err, records) {
+                if(err) { console.error(err); return; }
+                records.forEach(function (record) { console.log(record.getId()); });
+            });
+
+            console.log(list);
+            commit('UPDATEDATA', state);
+        },
+
         addMarketPrice({commit, state}, price){
             let request = [];
 
