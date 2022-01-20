@@ -121,7 +121,6 @@
 
             transactionBuy(){
                 console.log('Buy Transaction');
-                console.log(this.coinName);
                 if(this.buy_transaction['amount'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
                     console.log(this.buy_transaction);
                 }
