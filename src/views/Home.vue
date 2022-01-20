@@ -3,14 +3,10 @@
         <button @click="test()">test</button>
         <button @click="test2()">test2</button>
     </div>
-    <TransactionCard/>
+    <TransactionCard :coinName="coinName"/>
 </template>
 
 <script>
-    // import axios from "axios";
-    // import Airtable from "airtable";
-    // import CoinGecko from 'coingecko-api';
-    // import coinGeckoRequest from '../api/CoinGecko.js';
     import { mapActions, mapGetters } from 'vuex';
     import TransactionCard from '../components/TransactionCard.vue';
 
@@ -24,6 +20,7 @@
                 data: {},
                 loading: true,
                 errored: false,
+                coinName: 'CHSB',
             }
         },
         methods: {

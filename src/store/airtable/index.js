@@ -30,7 +30,7 @@ export default {
                         'MarketValue': response[res].fields['Market Value'],
                         'ProfitsUsd': response[res].fields['Profits $'],
                         'ProfitsPer': response[res].fields['Profits %'],
-                        'App': response[res].fields['App'][0],
+                        'App': response[res].fields['App'],
                         'PriceName': response[res].fields['Price Name'],
                         'Identifiant': response[res].id,
                     }

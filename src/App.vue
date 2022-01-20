@@ -45,7 +45,7 @@
         },
         methods: {
             ...mapActions([
-                'fetchDataBase', 'fetchPrice','addMessage', 'addFeedback', 'delFeedback'
+                'fetchDataBase', 'fetchPrice', 'addMessage', 'addFeedback', 'delFeedback'
             ]),
             addFeed() {
                 this.addMessage('En cours de developpement...');

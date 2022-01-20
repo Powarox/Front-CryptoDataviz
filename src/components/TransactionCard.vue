@@ -8,49 +8,100 @@
             <h3 class="item" :class="{active: tran}" @click="switchAction('tran')">Transférer</h3>
         </div>
 
-        <select id="pet-select">
-            <option value="">Plateforme</option>
-            <option value="SwissBorg">SwissBorg</option>
-            <option value="Binance">Binance</option>
-            <option value="Kraken">Kraken</option>
-            <option value="Exodus">Exodus</option>
-        </select>
+        <div class="buySection" v-if="buy">
+            <select v-model="buy_transaction['platform']">
+                <option disabled value="">Plateforme</option>
+                <option value="SwissBorg">SwissBorg</option>
+                <option value="Binance">Binance</option>
+                <option value="Kraken">Kraken</option>
+                <option value="Exodus">Exodus</option>
+            </select>
 
-        <div class="transaction">
-            <div class="quantite">
-                <label for="inp1">Quantité</label>
-                <input id="inp1" type="text" name="" value="" placeholder="CHSB">
+            <div class="transaction">
+                <div class="quantite">
+                    <label for="inp1">Quantité</label>
+                    <input id="inp1" type="number" v-model="buy_transaction['quantity']" placeholder="CHSB">
+                </div>
+
+                <div class="montant">
+                    <label for="inp2">Montant</label>
+                    <input id="inp2" type="number" v-model="buy_transaction['amount']" placeholder="USD">
+                </div>
             </div>
 
-            <div class="montant">
-                <label for="inp2">Montant</label>
-                <input id="inp2" type="curren" name="" value="" placeholder="USD">
+            <button @click="transactionBuy()">Ajouter</button>
+        </div>
+
+        <div class="sellSection" v-if="sell">
+            <div class="transaction">
+                <div class="quantite">
+                    <label for="inp1">Quantité</label>
+                    <input id="inp1" type="text" name="" value="" placeholder="CHSB">
+                </div>
+
+                <div class="montant">
+                    <label for="inp2">Montant</label>
+                    <input id="inp2" type="curren" name="" value="" placeholder="USD">
+                </div>
             </div>
+
+            <button @click="transactionSell()">Ajouter</button>
         </div>
 
-        <div class="" v-if="sell">
-            Sell wood
-        </div>
+        <div class="exchangeSection" v-if="tran">
+            <select id="pet-select">
+                <option disabled value="">Plateforme</option>
+                <option value="SwissBorg">SwissBorg</option>
+                <option value="Binance">Binance</option>
+                <option value="Kraken">Kraken</option>
+                <option value="Exodus">Exodus</option>
+            </select>
+            <select id="pet-select">
+                <option disabled value="">Plateforme</option>
+                <option value="SwissBorg">SwissBorg</option>
+                <option value="Binance">Binance</option>
+                <option value="Kraken">Kraken</option>
+                <option value="Exodus">Exodus</option>
+            </select>
+            <div class="transaction">
+                <div class="quantite">
+                    <label for="inp1">Quantité</label>
+                    <input id="inp1" type="text" name="" value="" placeholder="CHSB">
+                </div>
 
-        <div class="" v-if="tran">
-            Exchange
-        </div>
+                <div class="montant">
+                    <label for="inp2">Montant</label>
+                    <input id="inp2" type="curren" name="" value="" placeholder="USD">
+                </div>
+            </div>
 
-        <button type="button" name="button">Ajouter</button>
+            <button @click="transactionExchange()">Ajouter</button>
+        </div>
     </div>
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
+
     export default {
         name: 'TransactionCard',
+        props: ['coinName'],
         data() {
             return {
                 buy: true,
                 sell: false,
                 tran: false,
+
+                buy_transaction: { 'coinName': this.coinName, 'amount': 0, 'quantity': 0, 'platform': ''},
+                sell_transaction: {},
+                exchange_transaction: {},
             }
         },
         methods: {
+            ...mapActions([
+                'fetchDataBase', 'fetchPrice', 'addMessage', 'addFeedback', 'delFeedback'
+            ]),
+
             switchAction(action){
                 if(action === 'buy'){
                     this.buy = true;
@@ -66,7 +117,27 @@
                     this.sell = false;
                     this.tran = true;
                 }
-            }
+            },
+
+            transactionBuy(){
+                console.log('Buy Transaction');
+                console.log(this.coinName);
+                if(this.buy_transaction['amount'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
+                    console.log(this.buy_transaction);
+                }
+                else {
+                    this.addMessage('Champs manquant pour la transaction');
+                    this.addFeedback();
+                }
+            },
+
+            transactionSell(){
+                console.log('Sell Transaction');
+            },
+
+            transactionExchange(){
+                console.log('Exchange Transaction');
+            },
         }
     }
 </script>
@@ -118,6 +189,26 @@
         background: #555;
     }
 
+    .buySection, .sellSection, .exchangeSection {
+        display: grid;
+        grid-gap: 25px;
+    }
+
+    .transaction {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+
+    .transaction label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .quantite, .montant {
+        display: grid;
+    }
+
     select {
         height: 30px;
         color: var(--main-white-color);
@@ -136,18 +227,7 @@
         /* border: 2px solid var(--main-grey-color); */
     }
 
-    .transaction {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 10px;
-    }
-
-    .transaction label {
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    .transaction input {
+    input {
         height: 30px;
         width: 150px;
         color: var(--main-white-color);
@@ -157,14 +237,10 @@
         font-size: 17px;
     }
 
-    .transaction input:focus {
+    input:focus {
         outline: none;
         border: 2px solid var(--main-first-color);
         box-shadow: 0 0 5px var(--main-first-color);
-    }
-
-    .quantite, .montant {
-        display: grid;
     }
 
     button {
