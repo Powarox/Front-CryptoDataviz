@@ -15,7 +15,7 @@
                 <h3>Profits %</h3>
                 <h3>App</h3>
             </div>
-            <div class="rows"  v-for="row in this.data" v-bind:key="row.Name">
+            <div class="rows" v-for="(row, id) in this.data" v-bind:key="row.Name" @click="popUpTansaction(id, row.Name)">
                 <div class="cryptoName">
                     <img :src="getImgUrl(row.Name)" alt="">
                     <h3>{{ row.Name }}</h3>
@@ -40,21 +40,27 @@
             </div>
         </section>
 
-        <section class="">
-
-        </section>
+        <TransactionCard :id="id" :coinName="coinName" :show-component="showComponent"/>
     </div>
 </template>
 
 <script>
     import { mapActions, mapGetters } from 'vuex';
+    import TransactionCard from '../components/TransactionCard.vue';
 
     export default {
         name: 'Overview',
+        components: {
+            TransactionCard,
+        },
         data() {
             return {
                 data: {},
                 price: {},
+
+                id: '',
+                coinName: '',
+                showComponent: false,
             }
         },
         updated() {
@@ -68,8 +74,10 @@
                 'getData', 'getPrice',
             ]),
 
-            test() {
-                // this.addMarketPrice(this.price);
+            popUpTansaction(id, name) {
+                this.id = id;
+                this.coinName = name;
+                this.showComponent = true;
             },
 
             findWallet() {
@@ -80,11 +88,12 @@
                     if(this.price.data[this.data[rows].PriceName] !== undefined){
                         this.data[rows].MarketPrice = this.price.data[this.data[rows].PriceName].usd;
                     }
-                    // this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
-                    // this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;
-                    // this.data[rows].ProfitsPer = (this.data[rows].ProfitsPer)+1;
+                //     this.data[rows].MarketValue = this.data[rows].MarketPrice * this.data[rows].Coins;
+                //     this.data[rows].ProfitsUsd = this.data[rows].MarketValue - this.data[rows].Amounts;
+                //     this.data[rows].ProfitsPer = (this.data[rows].ProfitsPer)+1;
                 }
             },
+
             getImgUrl(pic) {
                 return require('../assets/crypto/'+pic+'.png')
             },
@@ -130,6 +139,7 @@
         grid-template-columns: repeat(8, 1fr);
         align-items: center;
         justify-items: center;
+        cursor: pointer;
     }
 
     .views .rows .cryptoName {

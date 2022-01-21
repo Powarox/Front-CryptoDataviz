@@ -20,9 +20,9 @@ export default {
             airtableBase('Wallet').select({
                 view: "Grid view"
             }).eachPage(response => {
-                let data = [];
+                let data = {};
                 for(let res in response) {
-                    data[res] = {
+                    data[response[res].id] = {
                         'Name': response[res].fields['Name'],
                         'Amounts': response[res].fields['Amounts'],
                         'Coins': response[res].fields['Coins'],
@@ -35,7 +35,7 @@ export default {
                         'Identifiant': response[res].id,
                     }
                 }
-                console.log(data);
+                // console.log(data);
                 commit('UPDATEDATA', data);
             },
             function done(err) {
@@ -43,10 +43,7 @@ export default {
             });
         },
 
-        createTransactionBuy({commit}, info){
-            console.log(info);
-            console.log(info['amount']);
-
+        createTransactionBuy({commit, state}, info){
             airtableBase('Transaction Buy').create([{
                 "fields": {
                     "Date": "2022-01-20T16:33:00.000Z",
@@ -54,7 +51,7 @@ export default {
                     "Amount": info['amount'],
                     "Coins": info['quantity'],
                     "Platform": info['platform'],
-                    "Coins ID": "recDjIYfWcxwbOwQH"
+                    "Coins ID": info.id,
                 }
             }],
             function(err, records) {
@@ -63,14 +60,10 @@ export default {
             });
 
             airtableBase('Wallet').update([{
-                "id": "recDjIYfWcxwbOwQH",
+                "id": info.id,
                 "fields": {
-                    "Name": info['coinName'],
-                    "Amounts": info['amount'],
-                    "Coins": info['quantity'],
-                    // "App": info['platform'],
-                    // "Market Price": 0.570981,
-                    // "Price Name": "swissborg"
+                    "Amounts": info['amount'] + state.data[info.id].Amounts,
+                    "Coins": info['quantity'] + state.data[info.id].Coins,
                 }
             }],
             function(err, records) {
@@ -78,7 +71,7 @@ export default {
                 records.forEach(function (record) { console.log(record.getId()); });
             });
 
-            commit('UPDATEFIELD');
+            commit('UPDATEFIELD', info);
         },
 
         addMarketPrice({commit, state}, price){
@@ -160,8 +153,10 @@ export default {
             state.data = data;
             state.loadData = true;
         },
-        UPDATEFIELD() {
-            console.log('field');
+        UPDATEFIELD(state, info) {
+            console.log('Update Field');
+            state.data[info.id].Amounts += info['amount'];
+            state.data[info.id].Coins += info['quantity'];
         },
     }
 }

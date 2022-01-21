@@ -1,6 +1,6 @@
 <template lang="html">
-    <div id="transactionCard">
-        <h1>Ajouter une transaction</h1>
+    <div id="transactionCard" v-if="showComponent && notClose">
+        <h1 @click="test()">Ajouter une transaction</h1>
 
         <div class="actions">
             <h3 class="item" :class="{active: buy_section}" @click="switchAction('buy_section')">Acheter</h3>
@@ -85,14 +85,16 @@
 
     export default {
         name: 'TransactionCard',
-        props: ['coinName'],
+        props: ['id', 'coinName', 'showComponent'],
         data() {
             return {
                 buy_section: true,
                 sell_section: false,
                 exchange_section: false,
 
-                buy_transaction: { 'coinName': this.coinName, 'amount': 0, 'quantity': 0, 'platform': ''},
+                notClose: true,
+
+                buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amount': 0, 'quantity': 0, 'platform': ''},
                 sell_transaction: {},
                 exchange_transaction: {},
             }
@@ -101,6 +103,10 @@
             ...mapActions([
                 'fetchDataBase', 'fetchPrice', 'createTransactionBuy', 'addMessage', 'addFeedback', 'delFeedback'
             ]),
+
+            test(){
+                this.notClose = false;
+            },
 
             switchAction(action){
                 if(action === 'buy_section'){
@@ -144,7 +150,7 @@
 <style lang="css" scoped>
     #transactionCard {
         padding: 20px;
-        position: absolute;
+        position: fixed;
         top: 30%;
         left: 40%;
         color: var(--main-white-color);
@@ -161,6 +167,10 @@
 
     h1 {
         font-size: 20px;
+    }
+
+    .close_pop {
+        display: none;
     }
 
     .actions {
