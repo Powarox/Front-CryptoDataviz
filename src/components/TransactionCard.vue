@@ -25,7 +25,7 @@
 
                 <div class="montant">
                     <label for="inp2">Montant</label>
-                    <input id="inp2" type="number" v-model="buy_transaction['amount']" placeholder="USD">
+                    <input id="inp2" type="number" v-model="buy_transaction['amounts']" placeholder="USD">
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
 
                 notClose: true,
 
-                buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amount': 0, 'quantity': 0, 'platform': ''},
+                buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amounts': 0, 'quantity': 0, 'platform': ''},
                 sell_transaction: {},
                 exchange_transaction: {},
             }
@@ -127,7 +127,11 @@
 
             transactionBuy(){
                 console.log('Buy Transaction');
+                this.buy_transaction['id'] = this.id;
+                this.buy_transaction['coinName'] = this.coinName;
+                
                 if(this.buy_transaction['amount'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
+                    console.log(this.buy_transaction);
                     this.createTransactionBuy(this.buy_transaction);
                 }
                 else {

@@ -32,7 +32,6 @@ export default {
                         'ProfitsPer': response[res].fields['Profits %'],
                         'App': response[res].fields['App'],
                         'PriceName': response[res].fields['Price Name'],
-                        'Identifiant': response[res].id,
                     }
                 }
                 // console.log(data);
@@ -48,7 +47,7 @@ export default {
                 "fields": {
                     "Date": "2022-01-20T16:33:00.000Z",
                     "Name": info['coinName'],
-                    "Amount": info['amount'],
+                    "Amounts": info['amounts'],
                     "Coins": info['quantity'],
                     "Platform": info['platform'],
                     "Coins ID": info.id,
@@ -62,7 +61,7 @@ export default {
             airtableBase('Wallet').update([{
                 "id": info.id,
                 "fields": {
-                    "Amounts": info['amount'] + state.data[info.id].Amounts,
+                    "Amounts": info['amounts'] + state.data[info.id].Amounts,
                     "Coins": info['quantity'] + state.data[info.id].Coins,
                 }
             }],
@@ -155,7 +154,7 @@ export default {
         },
         UPDATEFIELD(state, info) {
             console.log('Update Field');
-            state.data[info.id].Amounts += info['amount'];
+            state.data[info.id].Amounts += info['amounts'];
             state.data[info.id].Coins += info['quantity'];
         },
     }

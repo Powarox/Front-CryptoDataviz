@@ -77,6 +77,13 @@
         /* #ADF1CF */
     }
 
+    *, ::before ::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         color: var(--main-dark-blue-color);
