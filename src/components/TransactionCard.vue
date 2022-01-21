@@ -3,12 +3,12 @@
         <h1>Ajouter une transaction</h1>
 
         <div class="actions">
-            <h3 class="item" :class="{active: buy}" @click="switchAction('buy')">Acheter</h3>
-            <h3 class="item" :class="{active: sell}" @click="switchAction('sell')">Vendre</h3>
-            <h3 class="item" :class="{active: tran}" @click="switchAction('tran')">Transférer</h3>
+            <h3 class="item" :class="{active: buy_section}" @click="switchAction('buy_section')">Acheter</h3>
+            <h3 class="item" :class="{active: sell_section}" @click="switchAction('sell_section')">Vendre</h3>
+            <h3 class="item" :class="{active: exchange_section}" @click="switchAction('exchange_section')">Transférer</h3>
         </div>
 
-        <div class="buySection" v-if="buy">
+        <div class="buySection" v-if="buy_section">
             <select v-model="buy_transaction['platform']">
                 <option disabled value="">Plateforme</option>
                 <option value="SwissBorg">SwissBorg</option>
@@ -32,7 +32,7 @@
             <button @click="transactionBuy()">Ajouter</button>
         </div>
 
-        <div class="sellSection" v-if="sell">
+        <div class="sellSection" v-if="sell_section">
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
@@ -48,7 +48,7 @@
             <button @click="transactionSell()">Ajouter</button>
         </div>
 
-        <div class="exchangeSection" v-if="tran">
+        <div class="exchangeSection" v-if="exchange_section">
             <select id="pet-select">
                 <option disabled value="">Plateforme</option>
                 <option value="SwissBorg">SwissBorg</option>
@@ -88,9 +88,9 @@
         props: ['coinName'],
         data() {
             return {
-                buy: true,
-                sell: false,
-                tran: false,
+                buy_section: true,
+                sell_section: false,
+                exchange_section: false,
 
                 buy_transaction: { 'coinName': this.coinName, 'amount': 0, 'quantity': 0, 'platform': ''},
                 sell_transaction: {},
@@ -99,30 +99,30 @@
         },
         methods: {
             ...mapActions([
-                'fetchDataBase', 'fetchPrice', 'addMessage', 'addFeedback', 'delFeedback'
+                'fetchDataBase', 'fetchPrice', 'createTransactionBuy', 'addMessage', 'addFeedback', 'delFeedback'
             ]),
 
             switchAction(action){
-                if(action === 'buy'){
-                    this.buy = true;
-                    this.sell = false;
-                    this.tran = false;
+                if(action === 'buy_section'){
+                    this.buy_section = true;
+                    this.sell_section = false;
+                    this.exchange_section = false;
 
-                } else if(action === 'sell') {
-                    this.buy = false;
-                    this.sell = true;
-                    this.tran = false;
+                } else if(action === 'sell_section') {
+                    this.buy_section = false;
+                    this.sell_section = true;
+                    this.exchange_section = false;
                 } else {
-                    this.buy = false;
-                    this.sell = false;
-                    this.tran = true;
+                    this.buy_section = false;
+                    this.sell_section = false;
+                    this.exchange_section = true;
                 }
             },
 
             transactionBuy(){
                 console.log('Buy Transaction');
                 if(this.buy_transaction['amount'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
-                    console.log(this.buy_transaction);
+                    this.createTransactionBuy(this.buy_transaction);
                 }
                 else {
                     this.addMessage('Champs manquant pour la transaction');

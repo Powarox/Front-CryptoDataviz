@@ -43,14 +43,17 @@ export default {
             });
         },
 
-        transactionBuy({commit, state}, list){
+        createTransactionBuy({commit}, info){
+            console.log(info);
+            console.log(info['amount']);
+
             airtableBase('Transaction Buy').create([{
                 "fields": {
                     "Date": "2022-01-20T16:33:00.000Z",
-                    "Name": "BTC",
-                    "Amount": 20,
-                    "Coins": 35,
-                    "Platform": "SwissBorg",
+                    "Name": info['coinName'],
+                    "Amount": info['amount'],
+                    "Coins": info['quantity'],
+                    "Platform": info['platform'],
                     "Coins ID": "recDjIYfWcxwbOwQH"
                 }
             }],
@@ -58,13 +61,14 @@ export default {
                 if(err) { console.error(err); return; }
                 records.forEach(function (record) { console.log(record.getId()); });
             });
+
             airtableBase('Wallet').update([{
-                "id": "recaFYnnYfo4oXulG",
+                "id": "recDjIYfWcxwbOwQH",
                 "fields": {
-                    "Name": "CHSB",
-                    "Amounts": 465,
-                    "Coins": 775.2,
-                    // "App": "SwissBorg",
+                    "Name": info['coinName'],
+                    "Amounts": info['amount'],
+                    "Coins": info['quantity'],
+                    // "App": info['platform'],
                     // "Market Price": 0.570981,
                     // "Price Name": "swissborg"
                 }
@@ -74,8 +78,7 @@ export default {
                 records.forEach(function (record) { console.log(record.getId()); });
             });
 
-            console.log(list);
-            commit('UPDATEDATA', state);
+            commit('UPDATEFIELD');
         },
 
         addMarketPrice({commit, state}, price){
@@ -157,8 +160,8 @@ export default {
             state.data = data;
             state.loadData = true;
         },
-        UPDATEFIELD(state) {
-            console.log(state.data);
+        UPDATEFIELD() {
+            console.log('field');
         },
     }
 }

@@ -20,7 +20,7 @@
                 data: {},
                 loading: true,
                 errored: false,
-                coinName: 'CHSB',
+                coinName: 'BTC',
             }
         },
         methods: {
