@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex';
+    import { mapGetters } from 'vuex';
     import WalletList from '../components/WalletList.vue'
 
     export default {
@@ -17,7 +17,7 @@
         },
         data() {
             return {
-                
+
             }
         },
         methods: {

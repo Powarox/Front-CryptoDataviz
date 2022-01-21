@@ -1,21 +1,13 @@
 <template lang="html">
     <div id="walletList">
         <section class="listViews">
-            <!-- {{ findWallet() }} -->
             <h2>Mes Actifs</h2>
             <div class="rows">
                 <h3>Nom</h3>
                 <h3>Prix</h3>
                 <h3>Avoirs</h3>
-                    <!-- <h3>Amounts</h3> -->
-                    <!-- <h3>Coins</h3> -->
                 <h3>Valeur</h3>
-                    <!-- <h3>Market Value</h3> -->
-                    <!-- <h3>Buy Price</h3> -->
                 <h3>Profits/Pertes</h3>
-                    <!-- <h3>Profits $</h3> -->
-                    <!-- <h3>Profits %</h3> -->
-                <!-- <h3>App</h3> -->
             </div>
             <div class="rows" v-for="(row, id) in this.data" v-bind:key="row.Name" @click="popUpTansaction(id, row.Name)">
                 <div class="rowName">
@@ -34,7 +26,7 @@
 
                 <div class="rowValue items">
                     <h3>{{ row.MarketValue.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</h3>
-                    <span>Buy price $</span>
+                    <span>{{ row.BuyPrice.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</span>
                 </div>
 
                 <div class="rowProfits items" v-if="row.ProfitsUsd > 0">
@@ -46,7 +38,6 @@
                     <h3>{{ row.ProfitsUsd.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</h3>
                     <span>{{ row.ProfitsPer.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} %</span>
                 </div>
-                <!-- <h3>{{ row.App }}</h3> -->
             </div>
 
             <TransactionCard :id="id" :coinName="coinName" :show-component="showComponent"/>

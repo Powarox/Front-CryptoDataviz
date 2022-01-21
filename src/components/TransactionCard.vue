@@ -126,12 +126,9 @@
             },
 
             transactionBuy(){
-                console.log('Buy Transaction');
                 this.buy_transaction['id'] = this.id;
                 this.buy_transaction['coinName'] = this.coinName;
-                
                 if(this.buy_transaction['amount'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
-                    console.log(this.buy_transaction);
                     this.createTransactionBuy(this.buy_transaction);
                 }
                 else {

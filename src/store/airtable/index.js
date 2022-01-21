@@ -32,9 +32,10 @@ export default {
                         'ProfitsPer': response[res].fields['Profits %'],
                         'App': response[res].fields['App'],
                         'PriceName': response[res].fields['Price Name'],
+                        'BuyPrice': response[res].fields['Buy Price']
                     }
                 }
-                // console.log(data);
+                console.log(data);
                 commit('UPDATEDATA', data);
             },
             function done(err) {
@@ -45,7 +46,6 @@ export default {
         createTransactionBuy({commit, state}, info){
             airtableBase('Transaction Buy').create([{
                 "fields": {
-                    "Date": "2022-01-20T16:33:00.000Z",
                     "Name": info['coinName'],
                     "Amounts": info['amounts'],
                     "Coins": info['quantity'],
