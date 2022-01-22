@@ -125,7 +125,13 @@
         align-items: center;
         justify-items: center;
         border-bottom: 1px solid #888;
+        border-radius: 10px;
+        transition: 0.2s;
         cursor: pointer;
+    }
+
+    .listViews .rows:hover {
+        background: #CCC;
     }
 
     .listViews .rows .rowName {
