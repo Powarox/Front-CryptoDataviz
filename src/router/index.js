@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Overview from '../views/Overview.vue';
+import Analytics from '../views/Analytics.vue';
+import TransactionHistory from '../views/TransactionHistory.vue';
 import NotFound from '../views/NotFound.vue';
 
 const routes = [
@@ -9,7 +11,7 @@ const routes = [
         name: 'Home',
         component: Home,
         meta: {
-            title: 'Accueil',
+            title: 'Wallet - Accueil',
         }
     },
     {
@@ -17,7 +19,23 @@ const routes = [
         name: 'Overview',
         component: Overview,
         meta: {
-            title: 'Overview',
+            title: 'Wallet - Overview',
+        }
+    },
+    {
+        path: '/Analytics',
+        name: 'Analytics',
+        component: Analytics,
+        meta: {
+            title: 'Wallet - Analytics',
+        }
+    },
+    {
+        path: '/TransactionHistory',
+        name: 'TransactionHistory',
+        component: TransactionHistory,
+        meta: {
+            title: 'Wallet - Transaction History',
         }
     },
     {

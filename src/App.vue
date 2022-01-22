@@ -9,9 +9,9 @@
                 </router-link>
                 <router-link to="/"><i class="fas fa-wallet"></i> Wallet</router-link>
                 <router-link to="/Overview"><i class="far fa-chart-bar"></i> Overview</router-link>
-                <router-link to="/Overview"><i class="fas fa-chart-pie"></i> Analytics</router-link>
+                <router-link to="/Analytics"><i class="fas fa-chart-pie"></i> Analytics</router-link>
                 <router-link to="/Overview"><i class="fas fa-exchange-alt"></i> Transaction</router-link>
-                <router-link to="/Overview"><i class="fas fa-history"></i> History</router-link>
+                <router-link to="/TransactionHistory"><i class="fas fa-history"></i> History</router-link>
             </section>
             <section class="connexion" @click="addFeed()">
                 <router-link to=""><i class="fas fa-wallet"></i> Connect Wallet</router-link>
@@ -77,7 +77,7 @@
         /* #ADF1CF */
     }
 
-    *, ::before ::after {
+    *, ::before, ::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
