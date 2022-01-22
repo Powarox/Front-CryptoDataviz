@@ -20,12 +20,12 @@
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
-                    <input id="inp1" type="number" v-model="buy_transaction['quantity']" placeholder="CHSB">
+                    <input id="inp1" type="number" :placeholder="this.coinName" v-model="buy_transaction['quantity']">
                 </div>
 
                 <div class="montant">
                     <label for="inp2">Montant</label>
-                    <input id="inp2" type="number" v-model="buy_transaction['amounts']" placeholder="USD">
+                    <input id="inp2" type="number" placeholder="USD" v-model="buy_transaction['amounts']">
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
 
                 notClose: true,
 
-                buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amounts': 0, 'quantity': 0, 'platform': ''},
+                buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amounts': '', 'quantity': '', 'platform': ''},
                 sell_transaction: {},
                 exchange_transaction: {},
             }
