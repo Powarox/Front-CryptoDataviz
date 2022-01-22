@@ -116,7 +116,6 @@
     .listViews {
         display: grid;
         grid-template-columns: 1fr;
-        /* grid-gap: 10px; */
     }
 
     .listViews .rows {
@@ -152,12 +151,4 @@
         font-size: 15px;
 
     }
-
-
-    /* rowName
-rowPrice
-rowAvoirs
-rowValue
-rowProfits
-rowLosts */
 </style>

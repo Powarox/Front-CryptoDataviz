@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import Footer from './components/Footer.vue';
+    import Footer from './components/others/Footer.vue';
     import Feedback from './components/Feedback.vue';
     import { mapActions } from 'vuex';
 

@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import Feedback from './Feedback.vue';
+    import Feedback from '../Feedback.vue';
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
