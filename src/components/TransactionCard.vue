@@ -1,8 +1,8 @@
 <template lang="html">
     <div id="transactionCard" v-if="showComponent">
-        <div class="title" v-on:click="$emit('update:showComponent', false)">
+        <div class="title">
             <h1 @click="test()">Ajouter une transaction</h1>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times" v-on:click="$emit('update:showComponent', false)"></i>
         </div>
 
         <div class="actions">
@@ -36,25 +36,20 @@
         </div>
 
         <div class="sellSection" v-if="sell_section">
-            <select>
-                <option value="USDC">
-                    <div class="">
-                        <img src="../assets/crypto/USDC.png" alt="ici">
-                        USDC
-                    </div>
-                </option>
-                <option value="USDC"><img src="../assets/crypto/USDT.png" alt=""> USDT</option>
-                <option value="USDC"><img src="../assets/crypto/EURT.png" alt=""> EURT</option>
+            <select v-model="sell_selected">
+                <option :value="['USDC']"><img src="../assets/crypto/USDC.png" alt=""> USDC</option>
+                <option :value="['USDT']"><img src="../assets/crypto/USDT.png" alt=""> USDT</option>
+                <option :value="['EURT']"><img src="../assets/crypto/EURT.png" alt=""> EURT</option>
             </select>
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
-                    <input id="inp1" type="text" name="" value="" placeholder="CHSB">
+                    <input id="inp1" type="text" :placeholder="this.coinName" v-model="sell_transaction['quantity']">
                 </div>
 
                 <div class="montant">
                     <label for="inp2">Montant</label>
-                    <input id="inp2" type="curren" name="" value="" placeholder="USD">
+                    <input id="inp2" type="curren" placeholder="USD" v-model="sell_transaction['amounts']">
                 </div>
             </div>
 
@@ -106,9 +101,12 @@
                 sell_section: false,
                 exchange_section: false,
 
-                buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amounts': '', 'quantity': '', 'platform': ''},
-                sell_transaction: {},
+                buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amounts': '', 'quantity': '', 'platform': '' },
+                sell_transaction: { 'id': this.id, 'coinName': this.coinName, 'amounts': '', 'quantity': '', 'platform': '' },
                 exchange_transaction: {},
+
+                sell_selected: '',
+                stableID: { 'USDC': 'recZBJaNb0yruoPP5', 'USDT': 'recspbTgmdN0DpS7M', 'EURT': 'recCwfQHKOZ6Hw5vt' },
             }
         },
         methods: {
@@ -148,7 +146,17 @@
 
             transactionSell(){
                 console.log('Sell Transaction');
-                this.$emit('update:showComponent', false);
+                this.sell_transaction['stableCoin'] = this.sell_selected;
+                this.sell_transaction['stableID'] = this.stableID[this.sell_selected];
+
+                if(this.sell_transaction['amount'] !== 0 && this.sell_transaction['quantity'] !== 0 && this.sell_transaction['stableCoin'] !== '') {
+                    // this.createTransactionBuy(this.buy_transaction);
+                    this.$emit('update:showComponent', false);
+                }
+                else {
+                    this.addMessage('Champs manquant pour la transaction');
+                    this.addFeedback();
+                }
             },
 
             transactionExchange(){
