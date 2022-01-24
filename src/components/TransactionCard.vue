@@ -23,7 +23,7 @@
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
-                    <input id="inp1" type="number" :placeholder="this.coinName" v-model="buy_transaction['quantity']">
+                    <input id="inp1" type="number" step="0.01" :placeholder="this.coinName" v-model="buy_transaction['quantity']">
                 </div>
 
                 <div class="montant">
@@ -37,19 +37,20 @@
 
         <div class="sellSection" v-if="sell_section">
             <select v-model="sell_selected">
-                <option :value="['USDC']"><img src="../assets/crypto/USDC.png" alt=""> USDC</option>
-                <option :value="['USDT']"><img src="../assets/crypto/USDT.png" alt=""> USDT</option>
-                <option :value="['EURT']"><img src="../assets/crypto/EURT.png" alt=""> EURT</option>
+                <option disabled value="">Stable Coin</option>
+                <option value="USDC"><img src="../assets/crypto/USDC.png" alt=""> USDC</option>
+                <option value="USDT"><img src="../assets/crypto/USDT.png" alt=""> USDT</option>
+                <option value="EURT"><img src="../assets/crypto/EURT.png" alt=""> EURT</option>
             </select>
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
-                    <input id="inp1" type="text" :placeholder="this.coinName" v-model="sell_transaction['quantity']">
+                    <input id="inp1" type="number" step="0.01" :placeholder="this.coinName" v-model="sell_transaction['quantity']">
                 </div>
 
                 <div class="montant">
                     <label for="inp2">Montant</label>
-                    <input id="inp2" type="curren" placeholder="USD" v-model="sell_transaction['amounts']">
+                    <input id="inp2" type="number" placeholder="USD" v-model="sell_transaction['amounts']">
                 </div>
             </div>
 
@@ -111,7 +112,7 @@
         },
         methods: {
             ...mapActions([
-                'fetchDataBase', 'fetchPrice', 'createTransactionBuy', 'addMessage', 'addFeedback', 'delFeedback'
+                'fetchDataBase', 'fetchPrice', 'createTransactionBuy', 'createTransactionSell', 'addMessage', 'addFeedback', 'delFeedback'
             ]),
 
             switchAction(action){
@@ -149,8 +150,8 @@
                 this.sell_transaction['stableCoin'] = this.sell_selected;
                 this.sell_transaction['stableID'] = this.stableID[this.sell_selected];
 
-                if(this.sell_transaction['amount'] !== 0 && this.sell_transaction['quantity'] !== 0 && this.sell_transaction['stableCoin'] !== '') {
-                    // this.createTransactionBuy(this.buy_transaction);
+                if(this.sell_transaction['amount'] > 0 && this.sell_transaction['quantity'] !== '' && this.sell_transaction['stableCoin'] !== '') {
+                    this.createTransactionSell(this.sell_transaction);
                     this.$emit('update:showComponent', false);
                 }
                 else {

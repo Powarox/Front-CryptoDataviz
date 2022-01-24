@@ -57,7 +57,6 @@ export default {
                 if(err) { console.error(err); return; }
                 records.forEach(function (record) { console.log(record.getId()); });
             });
-
             airtableBase('Wallet').update([{
                 "id": info.id,
                 "fields": {
@@ -69,8 +68,13 @@ export default {
                 if(err) { console.error(err); return; }
                 records.forEach(function (record) { console.log(record.getId()); });
             });
+            commit('UPDATEFIELD');
+        },
 
-            commit('UPDATEFIELD', info);
+        createTransactionSell({commit, state}, info) {
+            console.log(info);
+            console.log(state);
+            commit('UPDATEFIELD2', info);
         },
     },
     mutations: {
@@ -82,6 +86,9 @@ export default {
             console.log('Update Field');
             state.data[info.id].Amounts += info['amounts'];
             state.data[info.id].Coins += info['quantity'];
+        },
+        UPDATEFIELD2() {
+            console.log('Update Field 2');
         },
     }
 }
