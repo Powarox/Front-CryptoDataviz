@@ -45,7 +45,7 @@
 <style lang="css" scoped>
     .feedback {
         width: fit-content;
-        padding: 0 10px;
+        padding: 15px 10px;
         position: fixed;
         top: 12%;
         right: 2%;
