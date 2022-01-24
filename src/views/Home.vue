@@ -10,7 +10,7 @@
         <li>{{ row.amo }}</li>
     </div>
 
-    <TransactionCard v-if="click" :coinName="func"/>
+    <TransactionCard :id="id" :coinName="coinName" v-model:show-component="click"/>
 </template>
 
 <script>
@@ -29,7 +29,8 @@
                 errored: false,
                 coinName: 'BTC',
 
-                click: false,
+                id: 'ejrneorfe',
+                click: true,
                 func: '',
 
                 testd: {

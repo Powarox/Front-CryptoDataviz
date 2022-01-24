@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <TransactionCard :id="id" :coinName="coinName" :show-component="showComponent"/>
+            <TransactionCard :id="id" :coinName="coinName"  v-model:show-component="showComponent"/>
         </section>
     </div>
 </template>

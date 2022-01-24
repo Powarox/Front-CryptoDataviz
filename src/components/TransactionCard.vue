@@ -1,6 +1,9 @@
 <template lang="html">
-    <div id="transactionCard" v-if="showComponent && notClose">
-        <h1 @click="test()">Ajouter une transaction</h1>
+    <div id="transactionCard" v-if="showComponent">
+        <div class="title" v-on:click="$emit('update:showComponent', false)">
+            <h1 @click="test()">Ajouter une transaction</h1>
+            <i class="fas fa-times"></i>
+        </div>
 
         <div class="actions">
             <h3 class="item" :class="{active: buy_section}" @click="switchAction('buy_section')">Acheter</h3>
@@ -33,6 +36,16 @@
         </div>
 
         <div class="sellSection" v-if="sell_section">
+            <select>
+                <option value="USDC">
+                    <div class="">
+                        <img src="../assets/crypto/USDC.png" alt="ici">
+                        USDC
+                    </div>
+                </option>
+                <option value="USDC"><img src="../assets/crypto/USDT.png" alt=""> USDT</option>
+                <option value="USDC"><img src="../assets/crypto/EURT.png" alt=""> EURT</option>
+            </select>
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
@@ -86,13 +99,12 @@
     export default {
         name: 'TransactionCard',
         props: ['id', 'coinName', 'showComponent'],
+        emits: ['update:showComponent'],
         data() {
             return {
                 buy_section: true,
                 sell_section: false,
                 exchange_section: false,
-
-                notClose: true,
 
                 buy_transaction: { 'id': this.id, 'coinName': this.coinName, 'amounts': '', 'quantity': '', 'platform': ''},
                 sell_transaction: {},
@@ -103,10 +115,6 @@
             ...mapActions([
                 'fetchDataBase', 'fetchPrice', 'createTransactionBuy', 'addMessage', 'addFeedback', 'delFeedback'
             ]),
-
-            test(){
-                this.notClose = false;
-            },
 
             switchAction(action){
                 if(action === 'buy_section'){
@@ -130,6 +138,7 @@
                 this.buy_transaction['coinName'] = this.coinName;
                 if(this.buy_transaction['amount'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
                     this.createTransactionBuy(this.buy_transaction);
+                    this.$emit('update:showComponent', false);
                 }
                 else {
                     this.addMessage('Champs manquant pour la transaction');
@@ -139,10 +148,12 @@
 
             transactionSell(){
                 console.log('Sell Transaction');
+                this.$emit('update:showComponent', false);
             },
 
             transactionExchange(){
                 console.log('Exchange Transaction');
+                this.$emit('update:showComponent', false);
             },
         }
     }
@@ -170,8 +181,16 @@
         font-size: 20px;
     }
 
-    .close_pop {
-        display: none;
+    i {
+        color: var(--main-red-color);
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .actions {
