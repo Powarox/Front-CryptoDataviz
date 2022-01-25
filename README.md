@@ -1,5 +1,5 @@
 # crypto-wallet
-[![](https://tokei.rs/b1/github/Powarox2159/CryptoWallet?category=code)](https://github.com/Powarox2159/CryptoWallet)
+[![](https://tokei.rs/b1/github/Powarox2159/CryptoWallet)](https://github.com/Powarox2159/CryptoWallet)
 
 ## Project setup
 ```
