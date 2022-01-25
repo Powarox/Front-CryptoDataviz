@@ -72,7 +72,6 @@ export default {
         },
 
         createTransactionSell({commit, state}, info) {
-            console.log(info);
             airtableBase('Transaction Sell').create([{
                 "fields": {
                     "Name": info.coinName,
