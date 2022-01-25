@@ -23,7 +23,7 @@
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
-                    <input id="inp1" type="number" step="0.01" :placeholder="this.coinName" v-model="buy_transaction['quantity']">
+                    <input id="inp1" type="number" :placeholder="this.coinName" v-model="buy_transaction['quantity']">
                 </div>
 
                 <div class="montant">
@@ -45,7 +45,7 @@
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
-                    <input id="inp1" type="number" step="0.01" :placeholder="this.coinName" v-model="sell_transaction['quantity']">
+                    <input id="inp1" type="number" :placeholder="this.coinName" v-model="sell_transaction['quantity']">
                 </div>
 
                 <div class="montant">
@@ -135,7 +135,7 @@
             transactionBuy(){
                 this.buy_transaction['id'] = this.id;
                 this.buy_transaction['coinName'] = this.coinName;
-                if(this.buy_transaction['amount'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
+                if(this.buy_transaction['amounts'] !== 0 && this.buy_transaction['quantity'] !== 0 && this.buy_transaction['platform'] !== '') {
                     this.createTransactionBuy(this.buy_transaction);
                     this.$emit('update:showComponent', false);
                 }
@@ -150,11 +150,13 @@
                 this.sell_transaction['stableCoin'] = this.sell_selected;
                 this.sell_transaction['stableID'] = this.stableID[this.sell_selected];
 
-                if(this.sell_transaction['amount'] > 0 && this.sell_transaction['quantity'] !== '' && this.sell_transaction['stableCoin'] !== '') {
+                if(this.sell_transaction['amounts'] !== 0 && this.sell_transaction['quantity'] !== 0 && this.sell_transaction['stableCoin'] !== '') {
                     this.createTransactionSell(this.sell_transaction);
+                    console.log(this.sell_transaction);
                     this.$emit('update:showComponent', false);
                 }
                 else {
+                    console.log(this.sell_transaction);
                     this.addMessage('Champs manquant pour la transaction');
                     this.addFeedback();
                 }
