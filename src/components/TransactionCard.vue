@@ -153,8 +153,8 @@
             },
 
             transactionSell(){
-                this.buy_transaction['id'] = this.id;
-                this.buy_transaction['coinName'] = this.coinName;
+                this.sell_transaction['id'] = this.id;
+                this.sell_transaction['coinName'] = this.coinName;
                 this.sell_transaction['stableCoin'] = this.sell_selected;
                 this.sell_transaction['stableID'] = this.stableID[this.sell_selected];
                 if(this.sell_transaction['amounts'] !== 0 && this.sell_transaction['quantity'] !== 0 && this.sell_transaction['stableCoin'] !== '' && this.sell_transaction['platform'] !== '') {

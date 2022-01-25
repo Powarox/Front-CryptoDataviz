@@ -60,8 +60,8 @@ export default {
             airtableBase('Wallet').update([{
                 "id": info.id,
                 "fields": {
-                    "Amounts": info.amounts + state.data[info.id].Amounts,
-                    "Coins": info.quantity + state.data[info.id].Coins,
+                    "Amounts": state.data[info.id].Amounts + info.amounts,
+                    "Coins": state.data[info.id].Coins + info.quantity ,
                 }
             }],
             function(err, records) {
@@ -71,7 +71,8 @@ export default {
             commit('UPDATEFIELD', info);
         },
 
-        createTransactionSell({commit}, info) {
+        createTransactionSell({commit, state}, info) {
+            console.log(info);
             airtableBase('Transaction Sell').create([{
                 "fields": {
                     "Name": info.coinName,
@@ -91,15 +92,15 @@ export default {
                 {
                     "id": info.id,
                     "fields": {
-                        "Amounts": info.amounts - state.data[info.id].Amounts,
-                        "Coins": info.quantity - state.data[info.id].Coins,
+                        "Amounts": state.data[info.id].Amounts - info.amounts,
+                        "Coins": state.data[info.id].Coins - info.quantity ,
                     },
                 },
                 {
-                    "id": info.id,
+                    "id": info.stableID,
                     "fields": {
-                        "Amounts": info.amounts - state.data[info.id].Amounts,
-                        "Coins": info.quantity - state.data[info.id].Coins,
+                        "Amounts": state.data[info.stableID].Amounts + info.amounts,
+                        "Coins": state.data[info.stableID].Coins + info.amounts ,
                     },
                 },
             ],
@@ -124,6 +125,8 @@ export default {
             console.log('Update Field 2');
             state.data[info.id].Amounts -= info['amounts'];
             state.data[info.id].Coins -= info['quantity'];
+            state.data[info.stableID].Amounts += info['amounts'];
+            state.data[info.stableID].Coins += info['quantity'];
         },
     }
 }
