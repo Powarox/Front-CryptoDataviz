@@ -46,10 +46,10 @@ export default {
         createTransactionBuy({commit, state}, info){
             airtableBase('Transaction Buy').create([{
                 "fields": {
-                    "Name": info['coinName'],
-                    "Amounts": info['amounts'],
-                    "Coins": info['quantity'],
-                    "Platform": info['platform'],
+                    "Name": info.coinName,
+                    "Amounts": info.amounts,
+                    "Coins": info.quantity,
+                    "Platform": info.platform,
                     "Coins ID": info.id,
                 }
             }],
@@ -60,8 +60,8 @@ export default {
             airtableBase('Wallet').update([{
                 "id": info.id,
                 "fields": {
-                    "Amounts": info['amounts'] + state.data[info.id].Amounts,
-                    "Coins": info['quantity'] + state.data[info.id].Coins,
+                    "Amounts": info.amounts + state.data[info.id].Amounts,
+                    "Coins": info.quantity + state.data[info.id].Coins,
                 }
             }],
             function(err, records) {
@@ -74,15 +74,35 @@ export default {
         createTransactionSell({commit}, info) {
             airtableBase('Transaction Sell').create([{
                 "fields": {
-                    "Name": info['coinName'],
-                    "Amounts": info['amounts'],
-                    "Coins": info['quantity'],
+                    "Name": info.coinName,
+                    "Amounts": info.amounts,
+                    "Coins": info.quantity,
                     "Coins ID": info.id,
-                    "Platform": info['platform'],
-                    "Stable Coin": info['stableCoin'],
-                    "Stable ID": info['stableID'],
+                    "Platform": info.platform,
+                    "Stable Coin": info.stableCoin,
+                    "Stable ID": info.stableID,
                 }
             }],
+            function(err, records) {
+                if(err) { console.error(err); return; }
+                records.forEach(function (record) { console.log(record.getId()); });
+            });
+            airtableBase('Wallet').update([
+                {
+                    "id": info.id,
+                    "fields": {
+                        "Amounts": info.amounts - state.data[info.id].Amounts,
+                        "Coins": info.quantity - state.data[info.id].Coins,
+                    },
+                },
+                {
+                    "id": info.id,
+                    "fields": {
+                        "Amounts": info.amounts - state.data[info.id].Amounts,
+                        "Coins": info.quantity - state.data[info.id].Coins,
+                    },
+                },
+            ],
             function(err, records) {
                 if(err) { console.error(err); return; }
                 records.forEach(function (record) { console.log(record.getId()); });
@@ -100,8 +120,10 @@ export default {
             state.data[info.id].Amounts += info['amounts'];
             state.data[info.id].Coins += info['quantity'];
         },
-        UPDATEFIELD2() {
+        UPDATEFIELD2(state, info) {
             console.log('Update Field 2');
+            state.data[info.id].Amounts -= info['amounts'];
+            state.data[info.id].Coins -= info['quantity'];
         },
     }
 }
