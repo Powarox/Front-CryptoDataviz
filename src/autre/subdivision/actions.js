@@ -1,6 +1,6 @@
 import airtableBase from "@/api/Airtable";
 
-// Fetch all data from Airtable
+// Fetch all data of Wallet from Airtable
 export function fetchDataBase({commit}) {
     airtableBase('Wallet').select({
         view: "Grid view"
@@ -28,7 +28,7 @@ export function fetchDataBase({commit}) {
     });
 }
 
-// Create transactionBuy and update Wallet
+// Create TransactionBuy and update Wallet
 export function createTransactionBuy({commit, state}, info){
     airtableBase('Transaction Buy').create([{
         "fields": {
@@ -57,6 +57,7 @@ export function createTransactionBuy({commit, state}, info){
     commit('UPDATEFIELD', info);
 }
 
+// Create TransactionSell and update Wallet
 export function createTransactionSell({commit, state}, info) {
     airtableBase('Transaction Sell').create([{
         "fields": {
