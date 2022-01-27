@@ -42,10 +42,11 @@
         created() {
             this.fetchDataBase();
             this.fetchPrice();
+            this.fetchDataBaseSellTransaction();
         },
         methods: {
             ...mapActions([
-                'fetchDataBase', 'fetchPrice', 'addMessage', 'addFeedback', 'delFeedback'
+                'fetchDataBase', 'fetchPrice', 'fetchDataBaseSellTransaction', 'addMessage', 'addFeedback', 'delFeedback'
             ]),
             addFeed() {
                 this.addMessage('En cours de developpement...');

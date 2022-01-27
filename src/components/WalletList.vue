@@ -158,6 +158,5 @@
     .listViews .rows .rowLosts span {
         color: var(--main-red-color);
         font-size: 15px;
-
     }
 </style>

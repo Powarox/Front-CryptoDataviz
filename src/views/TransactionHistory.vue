@@ -1,7 +1,7 @@
 <template lang="html">
     <div id="transactionHistory">
         <h2>Historique des transactions</h2>
-        <TransactionList></TransactionList>
+        <TransactionList :data="this.data"></TransactionList>
     </div>
 </template>
 
@@ -24,8 +24,11 @@
         },
         computed: {
             ...mapGetters([
-                'getLoadData', 'getLoadPrice', 'getData'
+                'getLoadData', 'getLoadPrice', 'getData', 'getDataSell',
             ]),
+            data() {
+                return this.getDataSell;
+            },
         }
     }
 </script>

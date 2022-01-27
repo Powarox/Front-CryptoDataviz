@@ -60,7 +60,7 @@ export default {
                         'Date': response[res].fields['Date'],
                         'Platform': response[res].fields['Platform'],
                         'StableCoin': response[res].fields['Stable Coin'],
-                        'Sell Price': response[res].fields['Sell Price'],
+                        'SellPrice': response[res].fields['Sell Price'],
                     }
                 }
                 console.log(data);
