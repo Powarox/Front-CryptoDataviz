@@ -21,7 +21,7 @@ export function fetchDataBase({commit}) {
             }
         }
         console.log(data);
-        commit('UPDATEDATA', data);
+        commit('updateData', data);
     },
     function done(err) {
         if(err) { console.error(err); return; }
@@ -54,7 +54,7 @@ export function createTransactionBuy({commit, state}, info){
         if(err) { console.error(err); return; }
         records.forEach(function (record) { console.log(record.getId()); });
     });
-    commit('UPDATEFIELD', info);
+    commit('updateBuyTransaction', info);
 }
 
 // Create TransactionSell and update Wallet
@@ -94,5 +94,5 @@ export function createTransactionSell({commit, state}, info) {
         if(err) { console.error(err); return; }
         records.forEach(function (record) { console.log(record.getId()); });
     });
-    commit('UPDATEFIELD2', info);
+    commit('updateSellTransaction', info);
 }
