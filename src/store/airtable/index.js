@@ -52,22 +52,18 @@ export default {
                 view: "Grid view"
             }).eachPage(response => {
                 let data = {};
-                console.log(response);
-                // for(let res in response) {
-                //     data[response[res].id] = {
-                //         'Name': response[res].fields['Name'],
-                //         'Amounts': response[res].fields['Amounts'],
-                //         'Coins': response[res].fields['Coins'],
-                //         'MarketPrice': response[res].fields['Market Price'],
-                //         'MarketValue': response[res].fields['Market Value'],
-                //         'ProfitsUsd': response[res].fields['Profits $'],
-                //         'ProfitsPer': response[res].fields['Profits %'],
-                //         'App': response[res].fields['App'],
-                //         'PriceName': response[res].fields['Price Name'],
-                //         'BuyPrice': response[res].fields['Buy Price']
-                //     }
-                // }
-                // console.log(data);
+                for(let res in response) {
+                    data[response[res].id] = {
+                        'Name': response[res].fields['Name'],
+                        'Amounts': response[res].fields['Amounts'],
+                        'Coins': response[res].fields['Coins'],
+                        'Date': response[res].fields['Date'],
+                        'Platform': response[res].fields['Platform'],
+                        'StableCoin': response[res].fields['Stable Coin'],
+                        'Sell Price': response[res].fields['Sell Price'],
+                    }
+                }
+                console.log(data);
                 commit('UPDATEDATASELL', data);
             },
             function done(err) {
@@ -146,6 +142,9 @@ export default {
         UPDATEDATA(state, data) {
             state.data = data;
             state.loadData = true;
+        },
+        UPDATEDATASELL(state, data) {
+            state.dataSell = data;
         },
         UPDATEFIELD(state, info) {
             console.log('Update Field');
