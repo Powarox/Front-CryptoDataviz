@@ -52,13 +52,19 @@
             <div class="transaction">
                 <div class="quantite">
                     <label for="inp1">Quantité</label>
-                    <input id="inp1" type="number" :placeholder="this.coinName" v-model="sell_transaction['quantity']">
+                    <input id="inp1" type="number" :max="this.coinNumber" :placeholder="this.coinName" v-model="sell_transaction['quantity']">
                 </div>
 
                 <div class="montant">
                     <label for="inp2">Montant</label>
                     <input id="inp2" type="number" placeholder="USD" v-model="sell_transaction['amounts']">
                 </div>
+            </div>
+            <div class="percent">
+                <label @click="setCoinValue(25)">25 %</label>
+                <label @click="setCoinValue(50)">50 %</label>
+                <label @click="setCoinValue(75)">75 %</label>
+                <label @click="setCoinValue(100)">100 %</label>
             </div>
 
             <button @click="transactionSell()">Ajouter</button>
@@ -101,7 +107,7 @@
 
     export default {
         name: 'TransactionCard',
-        props: ['id', 'coinName', 'showComponent'],
+        props: ['id', 'coinName', 'coinNumber', 'coinPrice', 'showComponent'],
         emits: ['update:showComponent'],
         data() {
             return {
@@ -139,6 +145,12 @@
                 }
             },
 
+            setCoinValue(value){
+                let result = value * this.coinNumber / 100
+                this.sell_transaction['quantity'] = result.toFixed(3);
+                this.sell_transaction['amounts'] = Math.round((result * this.coinPrice) * 100) / 100;
+            },
+
             transactionBuy(){
                 this.buy_transaction['id'] = this.id;
                 this.buy_transaction['coinName'] = this.coinName;
@@ -158,8 +170,14 @@
                 this.sell_transaction['stableCoin'] = this.sell_selected;
                 this.sell_transaction['stableID'] = this.stableID[this.sell_selected];
                 if(this.sell_transaction['amounts'] !== 0 && this.sell_transaction['quantity'] !== 0 && this.sell_transaction['stableCoin'] !== '' && this.sell_transaction['platform'] !== '') {
-                    this.createTransactionSell(this.sell_transaction);
-                    this.$emit('update:showComponent', false);
+                    if(this.sell_transaction['quantity'] < this.coinNumber){
+                        this.createTransactionSell(this.sell_transaction);
+                        this.$emit('update:showComponent', false);
+                    }
+                    else {
+                        this.addMessage('Solde ' + this.coinName + ' insuffisant');
+                        this.addFeedback();
+                    }
                 }
                 else {
                     this.addMessage('Champs manquant pour la transaction');
@@ -252,6 +270,21 @@
 
     .quantite, .montant {
         display: grid;
+    }
+
+    .percent {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .percent label {
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .percent label:hover {
+        color: var(--main-first-color);
     }
 
     select {

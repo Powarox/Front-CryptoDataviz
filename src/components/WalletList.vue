@@ -9,7 +9,7 @@
                 <h3>Valeur</h3>
                 <h3>Profits/Pertes</h3>
             </div>
-            <div class="rows" v-for="(row, id) in this.data" v-bind:key="row.Name" @click="popUpTansaction(id, row.Name)">
+            <div class="rows" v-for="(row, id) in this.data" v-bind:key="row.Name" @click="popUpTansaction(id, row.Name, row.Coins, row.MarketPrice)">
                 <div class="rowName">
                     <img :src="getImgUrl(row.Name)" alt="">
                     <h3>{{ row.Name }}</h3>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <TransactionCard :id="id" :coinName="coinName"  v-model:show-component="showComponent"/>
+            <TransactionCard :id="id" :coinName="coinName" :coinNumber="coinNumber" :coinPrice="coinPrice" v-model:show-component="showComponent"/>
         </section>
     </div>
 </template>
@@ -59,6 +59,8 @@
             return {
                 id: '',
                 coinName: '',
+                coinNumber: '',
+                coinPrice: '',
                 showComponent: false,
             }
         },
@@ -70,9 +72,11 @@
                 'getData', 'getPrice',
             ]),
 
-            popUpTansaction(id, name) {
+            popUpTansaction(id, name, number, price) {
                 this.id = id;
                 this.coinName = name;
+                this.coinNumber = number;
+                this.coinPrice = price;
                 this.showComponent = true;
             },
 
