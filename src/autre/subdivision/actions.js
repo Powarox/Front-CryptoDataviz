@@ -28,6 +28,31 @@ export function fetchDataBase({commit}) {
     });
 }
 
+// Fetch all data of TransactionSell from airtable
+export function fetchDataBaseSellTransaction({commit}) {
+    airtableBase('Transaction Sell').select({
+        view: "Grid view"
+    }).eachPage(response => {
+        let data = {};
+        for(let res in response) {
+            data[response[res].id] = {
+                'Name': response[res].fields['Name'],
+                'Amounts': response[res].fields['Amounts'],
+                'Coins': response[res].fields['Coins'],
+                'Date': response[res].fields['Date'],
+                'Platform': response[res].fields['Platform'],
+                'StableCoin': response[res].fields['Stable Coin'],
+                'SellPrice': response[res].fields['Sell Price'],
+            }
+        }
+        console.log(data);
+        commit('UPDATEDATASELL', data);
+    },
+    function done(err) {
+        if(err) { console.error(err); return; }
+    });
+}
+
 // Create TransactionBuy and update Wallet
 export function createTransactionBuy({commit, state}, info){
     airtableBase('Transaction Buy').create([{
