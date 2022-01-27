@@ -71,7 +71,7 @@
         </div>
 
         <div class="exchangeSection" v-if="exchange_section">
-            <select id="pet-select">
+            <!-- <select id="pet-select">
                 <option disabled value="">Plateforme</option>
                 <option value="SwissBorg">SwissBorg</option>
                 <option value="Binance">Binance</option>
@@ -95,7 +95,7 @@
                     <label for="inp2">Montant</label>
                     <input id="inp2" type="curren" name="" value="" placeholder="USD">
                 </div>
-            </div>
+            </div> -->
 
             <button @click="transactionExchange()">Ajouter</button>
         </div>
@@ -195,6 +195,7 @@
 
 <style lang="css" scoped>
     #transactionCard {
+        width: 350px;
         padding: 20px;
         position: fixed;
         top: 30%;

@@ -5,11 +5,15 @@ export default {
         return {
             data: {},
             loadData: false,
+            dataSell: {},
         };
     },
     getters: {
         getData(state) {
             return state.data;
+        },
+        getDataSell(state) {
+            return state.dataSell;
         },
         getLoadData(state) {
             return state.loadData;
@@ -37,6 +41,34 @@ export default {
                 }
                 console.log(data);
                 commit('UPDATEDATA', data);
+            },
+            function done(err) {
+                if(err) { console.error(err); return; }
+            });
+        },
+
+        fetchDataBaseSellTransaction({commit}) {
+            airtableBase('Transaction Sell').select({
+                view: "Grid view"
+            }).eachPage(response => {
+                let data = {};
+                console.log(response);
+                // for(let res in response) {
+                //     data[response[res].id] = {
+                //         'Name': response[res].fields['Name'],
+                //         'Amounts': response[res].fields['Amounts'],
+                //         'Coins': response[res].fields['Coins'],
+                //         'MarketPrice': response[res].fields['Market Price'],
+                //         'MarketValue': response[res].fields['Market Value'],
+                //         'ProfitsUsd': response[res].fields['Profits $'],
+                //         'ProfitsPer': response[res].fields['Profits %'],
+                //         'App': response[res].fields['App'],
+                //         'PriceName': response[res].fields['Price Name'],
+                //         'BuyPrice': response[res].fields['Buy Price']
+                //     }
+                // }
+                // console.log(data);
+                commit('UPDATEDATASELL', data);
             },
             function done(err) {
                 if(err) { console.error(err); return; }

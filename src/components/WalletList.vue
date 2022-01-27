@@ -31,12 +31,12 @@
 
                 <div class="rowProfits items" v-if="row.ProfitsUsd > 0">
                     <h3>{{ row.ProfitsUsd.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</h3>
-                    <span>{{ row.ProfitsPer.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} %</span>
+                    <span>{{ (row.ProfitsPer * 100).toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} %</span>
                 </div>
 
                 <div class="rowLosts items" v-else>
                     <h3>{{ row.ProfitsUsd.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} $</h3>
-                    <span>{{ row.ProfitsPer.toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} %</span>
+                    <span>{{ (row.ProfitsPer * 100).toLocaleString('fr-FR', {maximumFractionDigits: 2}) }} %</span>
                 </div>
             </div>
 
@@ -102,7 +102,6 @@
 </script>
 
 <style lang="css" scoped>
-
     #red {
         color: var(--main-red-color);
         color: var(--main-first-color);
