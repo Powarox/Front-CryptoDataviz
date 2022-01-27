@@ -46,7 +46,7 @@ export function fetchDataBaseSellTransaction({commit}) {
             }
         }
         console.log(data);
-        commit('UPDATEDATASELL', data);
+        commit('updateDataSell', data);
     },
     function done(err) {
         if(err) { console.error(err); return; }
