@@ -1,7 +1,6 @@
 <template lang="html">
     <div id="transactionList">
         <section class="listViews">
-            <h2>Mes Actifs</h2>
             <div class="rows">
                 <h3>Nom</h3>
                 <h3>Date</h3>
