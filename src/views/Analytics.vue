@@ -52,7 +52,6 @@
 
                 var chart = new ApexCharts(document.querySelector("#ApexBarLine"), options);
                 chart.render();
-
             }
         },
         computed: {
