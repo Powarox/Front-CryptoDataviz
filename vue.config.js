@@ -1,4 +1,5 @@
 
 let config = {
-    MY_KEY : '123456',
+    MY_AIRTABLE_KEY : 'keyninpGxob6oPycb',
+    MY_AIRTABLE_BASE : 'appuxrEpFcUYHpYGu',
 }
