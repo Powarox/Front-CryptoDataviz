@@ -1,7 +1,5 @@
 <template lang="html">
     <div id="overview">
-        <button @click="test()">load</button>
-
         <WalletList :data="this.data" v-if="loading"/>
     </div>
 </template>
