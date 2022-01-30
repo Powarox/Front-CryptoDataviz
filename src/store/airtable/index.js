@@ -109,6 +109,7 @@ export default {
                     "Platform": info.platform,
                     "Stable Coin": info.stableCoin,
                     "Stable ID": info.stableID,
+                    "Buy Price": state.data[info.id].BuyPrice,
                 }
             }],
             function(err, records) {
