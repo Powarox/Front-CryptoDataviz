@@ -120,7 +120,7 @@
                 exchange_transaction: {},
 
                 sell_selected: '',
-                stableID: { 'USDC': 'recZBJaNb0yruoPP5', 'USDT': 'recspbTgmdN0DpS7M', 'EURT': 'recCwfQHKOZ6Hw5vt' },
+                stableID: { 'USDC': 'recbWOyW4DwY77oY5', 'USDT': 'recEKghpfQLxg8rgM', 'EURT': 'recORkeQDrXDkfEEt' },
             }
         },
         methods: {
