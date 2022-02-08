@@ -6,7 +6,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
-    import WalletList from '../components/WalletList.vue'
+    import WalletList from '../components/WalletList.vue';
 
     export default {
         name: 'Overview',
