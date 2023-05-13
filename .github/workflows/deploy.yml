@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 16.3.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.3.0
+          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install
@@ -17,8 +23,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload to Server
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      # - name: Upload to Server
+      #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
 
       # - with:
       #     server: def
